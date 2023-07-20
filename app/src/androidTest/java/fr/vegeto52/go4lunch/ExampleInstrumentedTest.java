@@ -1,4 +1,4 @@
-package fr.vegeto52.myapplication;
+package fr.vegeto52.go4lunch;
 
 import android.content.Context;
 

@@ -1,8 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Go4Lunch</string>
-
     <!-- Authentication Activity -->
-    <string name="AA_go4lunch" translatable="false">Go4Lunch</string>
     <string name="AA_find_a_nice_restaurant">Find a nice restaurant and invite your co-workers for lunch !</string>
     <string name="AA_sign_in_with_facebook">Sign in with Facebook</string>
     <string name="AA_sign_in_with_google">Sign in with Google</string>
