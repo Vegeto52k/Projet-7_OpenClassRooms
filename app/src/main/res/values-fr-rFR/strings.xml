@@ -4,12 +4,24 @@
     <string name="AA_find_a_nice_restaurant">Trouve un bon restaurant et invite tes collègues pour déjeuner !</string>
     <string name="AA_sign_in_with_facebook">Connexion avec Facebook</string>
     <string name="AA_sign_in_with_google">Connexion avec Google</string>
-    <string name="AA_content_description_logo_go4lunch">Logo Go4Lunch</string>
-    <string name="AA_content_description_background">Photo d\'une table de restaurant</string>
-    <string name="AA_content_description_logo_facebook">Logo Facebook</string>
-    <string name="AA_content_description_logo_google">Logo Google</string>
     <string name="AA_facebook_authentication_cancelled">Authentification Facebook annulée</string>
     <string name="AA_facebook_authentication_failed">Authentification Facebook échouée</string>
     <string name="AA_facebook_login_disabled">Connexion via Facebook désactivée</string>
     <string name="AA_authentication_failed">Echec de l\'authentification</string>
+    <string name="AA_content_description_logo_go4lunch">Logo Go4Lunch</string>
+    <string name="AA_content_description_background">Photo d\'une table de restaurant</string>
+    <string name="AA_content_description_logo_facebook">Logo Facebook</string>
+    <string name="AA_content_description_logo_google">Logo Google</string>
+
+    <!-- Main Activity -->
+    <string name="MA_map_view">Carte</string>
+    <string name="MA_list_view">Restaurants</string>
+    <string name="MA_workmates">Collègue</string>
+    <string name="MA_your_lunch">VOTRE CHOIX</string>
+    <string name="MA_settings">PARAMETRES</string>
+    <string name="MA_logout">DECONNEXION</string>
+    <string name="MA_content_description_logo_go4lunch">Logo Go4Lunch</string>
+    <string name="MA_content_description_background_nav_drawer_header">Photo d\'une table de restaurant</string>
+    <string name="MA_content_description_personal_avatar">Avatar personnel</string>
+    <string name="MA_no_restaurant_selected">Aucun restaurant sélectionné</string>
 </resources>

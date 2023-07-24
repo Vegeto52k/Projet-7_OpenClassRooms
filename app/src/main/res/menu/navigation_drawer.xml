@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/MA_item_nav_your_lunch"
+            android:title="@string/MA_your_lunch"
+            android:icon="@drawable/baseline_local_dining_24" />
+
+        <item
+            android:id="@+id/MA_item_nav_settings"
+            android:title="@string/MA_settings"
+            android:icon="@drawable/baseline_settings_24" />
+
+        <item
+            android:id="@+id/MA_item_nav_logout"
+            android:title="@string/MA_logout"
+            android:icon="@drawable/baseline_power_settings_new_24" />
+
+    </group>
+</menu>

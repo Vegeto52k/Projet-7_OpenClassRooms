@@ -6,12 +6,32 @@
     <string name="AA_find_a_nice_restaurant">Find a nice restaurant and invite your co-workers for lunch !</string>
     <string name="AA_sign_in_with_facebook">Sign in with Facebook</string>
     <string name="AA_sign_in_with_google">Sign in with Google</string>
-    <string name="AA_content_description_logo_go4lunch">Logo Go4Lunch</string>
-    <string name="AA_content_description_background">Photo of a restaurant table</string>
-    <string name="AA_content_description_logo_facebook">Logo Facebook</string>
-    <string name="AA_content_description_logo_google">Logo Google</string>
     <string name="AA_facebook_authentication_cancelled">Facebook authentication cancelled</string>
     <string name="AA_facebook_authentication_failed">Facebook authentication failed</string>
     <string name="AA_facebook_login_disabled">Facebook login disabled</string>
     <string name="AA_authentication_failed">Authentication failed</string>
+    <string name="AA_content_description_logo_go4lunch">Logo Go4Lunch</string>
+    <string name="AA_content_description_background">Photo of a restaurant table</string>
+    <string name="AA_content_description_logo_facebook">Logo Facebook</string>
+    <string name="AA_content_description_logo_google">Logo Google</string>
+
+    <!-- Main Activity -->
+    <string name="MA_go4lunch" translatable="false">Go4Lunch</string>
+    <string name="MA_map_view">Map View</string>
+    <string name="MA_list_view">List View</string>
+    <string name="MA_workmates">Workmates</string>
+    <string name="MA_your_lunch">YOUR LUNCH</string>
+    <string name="MA_settings">SETTINGS</string>
+    <string name="MA_logout">LOGOUT</string>
+    <string name="MA_content_description_logo_go4lunch">Logo Go4Lunch</string>
+    <string name="MA_content_description_background_nav_drawer_header">Photo of a restaurant table</string>
+    <string name="MA_content_description_personal_avatar">Personal avatar</string>
+    <string name="MA_no_restaurant_selected">No restaurant selected</string>
+
+    <!-- Used in NavigationDrawer -->
+    <string name="MA_navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="MA_navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

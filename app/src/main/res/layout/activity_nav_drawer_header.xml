@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/MA_background_nav_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@color/black"
+        android:contentDescription="@string/MA_content_description_background_nav_drawer_header" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/MA_go4lunch"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/MA_photo_user_nav_header"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/MA_background_nav_header"
+        android:contentDescription="@string/MA_content_description_personal_avatar" />
+
+    <TextView
+        android:id="@+id/MA_username_nav_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintLeft_toRightOf="@id/MA_photo_user_nav_header"
+        app:layout_constraintTop_toTopOf="@+id/MA_photo_user_nav_header"
+        tools:text="Arthur Pendragon" />
+
+    <TextView
+        android:id="@+id/MA_mail_user_nav_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintLeft_toRightOf="@id/MA_photo_user_nav_header"
+        app:layout_constraintBottom_toBottomOf="@id/MA_photo_user_nav_header"
+        tools:text="arthur.pendragon@gmail.com" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
