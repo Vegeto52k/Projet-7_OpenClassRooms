@@ -2,14 +2,11 @@ package fr.vegeto52.go4lunch.data;
 
 import android.app.Application;
 
-import com.google.firebase.FirebaseApp;
-
 /**
  * Created by Vegeto52-PC on 19/07/2023.
  */
 public class MainApplication extends Application {
 
-    private static final String TAG = "MainApplication";
     private static Application mApplication;
 
     @Override

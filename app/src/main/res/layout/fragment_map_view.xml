@@ -2,18 +2,33 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MVF_fragment_mapview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.MapViewFragment">
+    tools:context=".ui.mapViewFragment.MapViewFragment">
 
-    <TextView
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/MVF_mapview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="MapViewFragment"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        android:apiKey="AIzaSyCuiuuSU0l2xgi-bWz_gYHM1EkZJeuWmx4"
+        android:contentDescription="@string/MVF_map_view"/>
+
+    <ImageButton
+        android:id="@+id/MVF_button_center_map"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/button_round_white"
+        android:contentDescription="@string/MVF_button_center_map"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/baseline_my_location_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="ImageContrastCheck,RedundantDescriptionCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

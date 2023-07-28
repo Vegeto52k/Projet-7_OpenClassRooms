@@ -24,4 +24,11 @@
     <string name="MA_content_description_background_nav_drawer_header">Photo d\'une table de restaurant</string>
     <string name="MA_content_description_personal_avatar">Avatar personnel</string>
     <string name="MA_no_restaurant_selected">Aucun restaurant sélectionné</string>
+
+    <!-- Map View Fragment -->
+    <string name="MVF_button_center_map">Bouton pour recentrer la caméra</string>
+    <string name="MVF_map_view">Vue de la carte</string>
+
+    <!-- Menu Search -->
+    <string name="MS_menu_search">Recherche</string>
 </resources>
