@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/WVF_fragment_list_workmates"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.WorkmatesViewFragment">
+    tools:context=".ui.workmatesViewFragment.WorkmatesViewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/WVF_recyclerview_list_workmates"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="WorkmatesViewFragment"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/WVF_list_workmate_view_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/WVF_no_workmate_registered"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

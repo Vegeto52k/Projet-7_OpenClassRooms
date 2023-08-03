@@ -48,4 +48,10 @@
     <string name="MS_sort_by_distance">Trier par distance</string>
     <string name="MS_sort_by_rating">Trier par note</string>
     <string name="MS_sort_by_workmates">Trier par collègues</string>
+
+    <!-- Workmates View Fragment -->
+    <string name="WVF_no_workmate_registered">Aucun utilisateur enregistré</string>
+    <string name="WVF_is_eating_at">%s mange chez %s</string>
+    <string name="WVF_is_eating_at_a_distant_restaurant">%s mange dans un restaurant éloigné</string>
+    <string name="WVF_has_not_decided_yet">%s n\'a pas encore choisi</string>
 </resources>

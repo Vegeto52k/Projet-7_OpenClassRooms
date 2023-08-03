@@ -13,6 +13,7 @@ import fr.vegeto52.go4lunch.data.repository.NearbySearchRepository;
 import fr.vegeto52.go4lunch.ui.listViewFragment.ListViewViewModel;
 import fr.vegeto52.go4lunch.ui.mainActivity.MainActivityViewModel;
 import fr.vegeto52.go4lunch.ui.mapViewFragment.MapViewViewModel;
+import fr.vegeto52.go4lunch.ui.workmatesViewFragment.WorkmatesViewViewModel;
 
 /**
  * Created by Vegeto52-PC on 23/07/2023.
@@ -60,6 +61,9 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         }
         if (modelClass.isAssignableFrom(ListViewViewModel.class)){
             return (T) new ListViewViewModel(mLocationRepository, mNearbySearchRepository, mFirestoreRepository);
+        }
+        if (modelClass.isAssignableFrom(WorkmatesViewViewModel.class)){
+            return (T) new WorkmatesViewViewModel(mFirestoreRepository, mNearbySearchRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }
