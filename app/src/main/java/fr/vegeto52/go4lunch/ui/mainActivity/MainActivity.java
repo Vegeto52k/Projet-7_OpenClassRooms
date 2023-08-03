@@ -35,7 +35,7 @@ import fr.vegeto52.go4lunch.databinding.ActivityMainBinding;
 import fr.vegeto52.go4lunch.model.User;
 import fr.vegeto52.go4lunch.ui.AuthenticationActivity;
 import fr.vegeto52.go4lunch.ui.DetailsRestaurantFragment;
-import fr.vegeto52.go4lunch.ui.ListViewFragment;
+import fr.vegeto52.go4lunch.ui.listViewFragment.ListViewFragment;
 import fr.vegeto52.go4lunch.ui.mapViewFragment.MapViewFragment;
 import fr.vegeto52.go4lunch.ui.SettingsFragment;
 import fr.vegeto52.go4lunch.ui.WorkmatesViewFragment;

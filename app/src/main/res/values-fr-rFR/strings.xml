@@ -31,4 +31,21 @@
 
     <!-- Menu Search -->
     <string name="MS_menu_search">Recherche</string>
+
+    <!-- List View Fragment -->
+    <string name="LVF_content_description_photo_restaurant">Photo du restaurant</string>
+    <string name="LVF_content_description_icon_person">Icône personne</string>
+    <string name="LVF_content_description_icon_star">Icône étoile</string>
+    <string name="LVF_content_description_icon_star_2">Icône étoile 2</string>
+    <string name="LVF_content_description_icon_star_3">Icône étoile 3</string>
+    <string name="LVF_no_restaurants_nearby">Aucun restaurant à proximité</string>
+    <string name="LVF_open">Ouvert</string>
+    <string name="LVF_close">Fermé</string>
+    <string name="LVF_no_information">Aucune information</string>
+
+    <!-- Menu Sort -->
+    <string name="MS_sort_by_name">Trier par nom</string>
+    <string name="MS_sort_by_distance">Trier par distance</string>
+    <string name="MS_sort_by_rating">Trier par note</string>
+    <string name="MS_sort_by_workmates">Trier par collègues</string>
 </resources>

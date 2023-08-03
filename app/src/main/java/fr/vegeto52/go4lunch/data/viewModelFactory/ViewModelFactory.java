@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import fr.vegeto52.go4lunch.data.repository.FirestoreRepository;
 import fr.vegeto52.go4lunch.data.repository.LocationRepository;
 import fr.vegeto52.go4lunch.data.repository.NearbySearchRepository;
+import fr.vegeto52.go4lunch.ui.listViewFragment.ListViewViewModel;
 import fr.vegeto52.go4lunch.ui.mainActivity.MainActivityViewModel;
 import fr.vegeto52.go4lunch.ui.mapViewFragment.MapViewViewModel;
 
@@ -56,6 +57,9 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         }
         if (modelClass.isAssignableFrom(MapViewViewModel.class)){
             return (T) new MapViewViewModel(mLocationRepository, mNearbySearchRepository, mFirestoreRepository);
+        }
+        if (modelClass.isAssignableFrom(ListViewViewModel.class)){
+            return (T) new ListViewViewModel(mLocationRepository, mNearbySearchRepository, mFirestoreRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

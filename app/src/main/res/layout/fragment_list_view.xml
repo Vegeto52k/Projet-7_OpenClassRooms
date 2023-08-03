@@ -2,16 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LVF_fragment_list_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.ListViewFragment">
+    tools:context=".ui.listViewFragment.ListViewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/LVF_recyclerview_list_resto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="ListViewFragment"
+        tools:listitem="@layout/item_restaurant"/>
+
+    <TextView
+        android:id="@+id/LVF_list_resto_view_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/LVF_no_restaurants_nearby"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

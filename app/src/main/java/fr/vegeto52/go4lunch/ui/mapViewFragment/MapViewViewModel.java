@@ -28,12 +28,7 @@ public class MapViewViewModel extends ViewModel {
         LiveData<List<Restaurant.Results>> listRestaurants = nearbySearchRepository.getListRestaurantLiveData();
         LiveData<List<User>> listUsers = firestoreRepository.getListUsersMutableLiveData();
 
-        mMediatorLiveData.addSource(location, location1 -> {
-        //    if (location1 != null){
-        //        nearbySearchRepository.getNearbySearch(location1);
-        //    }
-            combine(location1, listRestaurants.getValue(), listUsers.getValue());
-        });
+        mMediatorLiveData.addSource(location, location1 -> combine(location1, listRestaurants.getValue(), listUsers.getValue()));
         mMediatorLiveData.addSource(listRestaurants, listRestaurants1 -> combine(location.getValue(), listRestaurants1, listUsers.getValue()));
         mMediatorLiveData.addSource(listUsers, listUsers1 -> combine(location.getValue(), listRestaurants.getValue(), listUsers1));
 

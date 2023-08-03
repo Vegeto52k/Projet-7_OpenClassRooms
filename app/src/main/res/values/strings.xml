@@ -39,4 +39,23 @@
     <!-- Menu Search -->
     <string name="MS_menu_search">Search</string>
 
+    <!-- List View Fragment -->
+    <string name="LVF_content_description_photo_restaurant">Photo restaurant</string>
+    <string name="LVF_content_description_icon_person">Icon person</string>
+    <string name="LVF_content_description_icon_star">Icon star</string>
+    <string name="LVF_content_description_icon_star_2">Icon star 2</string>
+    <string name="LVF_content_description_icon_star_3">Icon star 3</string>
+    <string name="LVF_no_restaurants_nearby">No restaurant nearby</string>
+    <string name="LVF_count_user" translatable="false">(%d)</string>
+    <string name="LVF_open">Open</string>
+    <string name="LVF_close">Close</string>
+    <string name="LVF_no_information">No information</string>
+
+    <!-- Menu Sort -->
+    <string name="MS_action_filter" translatable="false">Action filter</string>
+    <string name="MS_sort_by_name">Sort by name</string>
+    <string name="MS_sort_by_distance">Sort by distance</string>
+    <string name="MS_sort_by_rating">Sort by rating</string>
+    <string name="MS_sort_by_workmates">Sort by workmates</string>
+
 </resources>

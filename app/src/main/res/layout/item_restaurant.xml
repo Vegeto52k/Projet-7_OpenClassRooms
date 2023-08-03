@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LVF_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="4dp">
+
+    <ImageView
+        android:id="@+id/LVF_photo_restaurant"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/LVF_content_description_photo_restaurant" />
+
+    <TextView
+        android:id="@+id/LVF_name_restaurant"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_marginStart="4dp"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:text="La Casa di Pizza"/>
+
+    <TextView
+        android:id="@+id/LVF_adress_restaurant"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_marginStart="4dp"
+        android:textSize="8sp"
+        app:layout_constraintTop_toBottomOf="@+id/LVF_name_restaurant"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:text="24 Rue des glandus"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/LVF_open_hour"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_marginStart="4dp"
+        android:textSize="8sp"
+        app:layout_constraintTop_toBottomOf="@id/LVF_adress_restaurant"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:text="Open until 7pm"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/LVF_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintRight_toLeftOf="@+id/LVF_photo_restaurant"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="120m"/>
+
+    <TextView
+        android:id="@+id/LVF_number_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="8sp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintRight_toLeftOf="@id/LVF_photo_restaurant"
+        app:layout_constraintTop_toBottomOf="@id/LVF_distance"
+        tools:text="(3)"
+        tools:ignore="SmallSp" />
+
+    <ImageView
+        android:id="@+id/LVF_icon_person"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/baseline_perm_identity_24"
+        app:layout_constraintTop_toBottomOf="@id/LVF_distance"
+        app:layout_constraintRight_toLeftOf="@id/LVF_number_person"
+        android:contentDescription="@string/LVF_content_description_icon_person" />
+
+    <ImageView
+        android:id="@+id/LVF_icon_star_rating_1"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:contentDescription="@string/LVF_content_description_icon_star"
+        android:src="@drawable/baseline_star_rate_24"
+        app:layout_constraintRight_toLeftOf="@id/LVF_photo_restaurant"
+        app:layout_constraintTop_toBottomOf="@id/LVF_number_person"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/LVF_icon_star_rating_2"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:contentDescription="@string/LVF_content_description_icon_star_2"
+        android:src="@drawable/baseline_star_rate_24"
+        app:layout_constraintRight_toLeftOf="@id/LVF_icon_star_rating_1"
+        app:layout_constraintTop_toBottomOf="@id/LVF_number_person"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/LVF_icon_star_rating_3"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:contentDescription="@string/LVF_content_description_icon_star_3"
+        android:src="@drawable/baseline_star_rate_24"
+        app:layout_constraintRight_toLeftOf="@id/LVF_icon_star_rating_2"
+        app:layout_constraintTop_toBottomOf="@id/LVF_number_person"
+        tools:ignore="ImageContrastCheck" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

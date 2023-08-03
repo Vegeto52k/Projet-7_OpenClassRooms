@@ -59,7 +59,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fr.vegeto52.go4lunch.databinding.FragmentMapViewBinding binding = FragmentMapViewBinding.inflate(inflater, container, false);
+        FragmentMapViewBinding binding = FragmentMapViewBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         mMapView = view.findViewById(R.id.MVF_mapview);
         mButtonCenterMap = view.findViewById(R.id.MVF_button_center_map);
@@ -70,6 +70,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
+    // Initialize ViewModel
     private void initViewModel(){
         ViewModelFactory viewModelFactory = ViewModelFactory.getInstance();
         MapViewViewModel mapViewViewModel = new ViewModelProvider(this, viewModelFactory).get(MapViewViewModel.class);
@@ -116,10 +117,12 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onLowMemory();
     }
 
+    // Button for center map
     private void centerCameraPosition(){
         mButtonCenterMap.setOnClickListener(view -> mMap.moveCamera(CameraUpdateFactory.newLatLng(mUserLocation)));
     }
 
+    // Add User Marker
     private void addUserMarker(){
         double userLatitude = mLocation.getLatitude();
         double userLongitude = mLocation.getLongitude();
@@ -131,6 +134,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         markersToResto();
     }
 
+    // Add Marker Restaurants
     private void markersToResto(){
         List<String> selectedRestos = new ArrayList<>();
         for (User user : mListUsers){
@@ -173,6 +177,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
 
 
+    // Search menu
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_search_view, menu);
@@ -202,6 +207,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    // Perform Search
     private void performSearch(String text){
         List<String> selectedRestos = new ArrayList<>();
         for (User user : mListUsers){
