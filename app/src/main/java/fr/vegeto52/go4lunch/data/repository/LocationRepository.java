@@ -27,6 +27,7 @@ public class LocationRepository {
         getLocation();
     }
 
+    // Get Location
     @SuppressLint("MissingPermission")
     private void getLocation(){
         Context context = MainApplication.getApplication();
@@ -37,6 +38,7 @@ public class LocationRepository {
         Log.d("LocationRepository", "getLocation lancé");
     }
 
+    // LiveData for Location
     public LiveData<Location> getLocationLiveData(){
         return mLocationMutableLiveData;
     }

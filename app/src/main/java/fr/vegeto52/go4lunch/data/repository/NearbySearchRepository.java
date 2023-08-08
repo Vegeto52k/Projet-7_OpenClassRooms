@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import fr.vegeto52.go4lunch.data.RetrofitService;
+import fr.vegeto52.go4lunch.data.api.RetrofitService;
 import fr.vegeto52.go4lunch.data.api.NearbySearchApi;
 import fr.vegeto52.go4lunch.model.Restaurant;
 import retrofit2.Call;
@@ -35,6 +35,7 @@ public class NearbySearchRepository {
 
     }
 
+    // Get List Restaurants
     public void getNearbySearch(Location location){
         NearbySearchApi nearbySearchApi = RetrofitService.getRetrofitInstance().create(NearbySearchApi.class);
         mCurrentLatitude = location.getLatitude();
@@ -57,6 +58,7 @@ public class NearbySearchRepository {
         });
     }
 
+    // LiveData for List Restaurants
     public LiveData<List<Restaurant.Results>> getListRestaurantLiveData(){
         return mListRestaurantMutableLiveData;
     }

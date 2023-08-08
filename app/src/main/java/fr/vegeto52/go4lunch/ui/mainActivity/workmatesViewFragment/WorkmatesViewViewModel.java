@@ -1,4 +1,4 @@
-package fr.vegeto52.go4lunch.ui.workmatesViewFragment;
+package fr.vegeto52.go4lunch.ui.mainActivity.workmatesViewFragment;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;

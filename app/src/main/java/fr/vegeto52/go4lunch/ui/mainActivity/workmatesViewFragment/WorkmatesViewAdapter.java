@@ -1,4 +1,4 @@
-package fr.vegeto52.go4lunch.ui.workmatesViewFragment;
+package fr.vegeto52.go4lunch.ui.mainActivity.workmatesViewFragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import fr.vegeto52.go4lunch.R;
 import fr.vegeto52.go4lunch.model.Restaurant;
 import fr.vegeto52.go4lunch.model.User;
-import fr.vegeto52.go4lunch.ui.DetailsRestaurantFragment;
+import fr.vegeto52.go4lunch.ui.mainActivity.detailsRestaurantFragment.DetailsRestaurantFragment;
 
 /**
  * Created by Vegeto52-PC on 03/08/2023.
@@ -93,21 +93,25 @@ public class WorkmatesViewAdapter extends RecyclerView.Adapter<WorkmatesViewAdap
             String[] nameParts = fullName.split(" ");
             String firstName = nameParts[0];
             if (user.getSelectedResto() != null){
+
                 mPlaceId = user.getSelectedResto();
-                for (Restaurant.Results restaurant : mRestaurantList){
-                    if (restaurant.getPlace_id().equals(mPlaceId)){
-                        String nameRestaurant = restaurant.getName();
-                        String eatingAtRestaurant = mContext.getString(R.string.WVF_is_eating_at);
-                        String formattedString = String.format(eatingAtRestaurant, firstName, nameRestaurant);
-                        mNameWorkmate.setText(formattedString);
-                    } else if (mPlaceId.equals("")){
-                        String hasNotDecidedYet = mContext.getString(R.string.WVF_has_not_decided_yet);
-                        String formattedString = String.format(hasNotDecidedYet, firstName);
-                        mNameWorkmate.setText(formattedString);
-                    } else {
-                        String eatingAtRestaurant = mContext.getString(R.string.WVF_is_eating_at_a_distant_restaurant);
-                        String formattedString = String.format(eatingAtRestaurant, firstName);
-                        mNameWorkmate.setText(formattedString);
+                if (mPlaceId.equals("")){
+                    String hasNotDecidedYet = mContext.getString(R.string.WVF_has_not_decided_yet);
+                    String formattedString = String.format(hasNotDecidedYet, firstName);
+                    mNameWorkmate.setText(formattedString);
+                } else {
+                    for (Restaurant.Results restaurant : mRestaurantList){
+                        if (restaurant.getPlace_id().equals(mPlaceId)){
+                            String nameRestaurant = restaurant.getName();
+                            String eatingAtRestaurant = mContext.getString(R.string.WVF_is_eating_at);
+                            String formattedString = String.format(eatingAtRestaurant, firstName, nameRestaurant);
+                            mNameWorkmate.setText(formattedString);
+                            break;
+                        } else {
+                            String eatingAtRestaurant = mContext.getString(R.string.WVF_is_eating_at_a_distant_restaurant);
+                            String formattedString = String.format(eatingAtRestaurant, firstName);
+                            mNameWorkmate.setText(formattedString);
+                        }
                     }
                 }
             }

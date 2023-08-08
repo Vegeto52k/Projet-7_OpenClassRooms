@@ -1,5 +1,8 @@
 package fr.vegeto52.go4lunch.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 /**
@@ -14,18 +17,20 @@ public class User {
     @Nullable
     private String mSelectedResto;
     private String mAdressMail;
+    private List<String> mFAVORITE_RESTO_LIST = new ArrayList<>();
 
 
     public User() {
     }
 
     //Constructor
-    public User(String uid, String userName, @Nullable String urlPhoto, @Nullable String selectedResto, String adressMail) {
+    public User(String uid, String userName, @Nullable String urlPhoto, @Nullable String selectedResto, String adressMail, List<String> FAVORITE_RESTO_LIST) {
         mUid = uid;
         mUserName = userName;
         mUrlPhoto = urlPhoto;
         mSelectedResto = selectedResto;
         mAdressMail = adressMail;
+        mFAVORITE_RESTO_LIST = FAVORITE_RESTO_LIST;
     }
 
     //Getters
@@ -51,6 +56,9 @@ public class User {
         return mAdressMail;
     }
 
+    public List<String> getFavoritesResto() {
+        return mFAVORITE_RESTO_LIST;
+    }
 
     //Setters
     public void setUid(String uid) {
@@ -71,5 +79,9 @@ public class User {
 
     public void setAdressMail(String adressMail) {
         mAdressMail = adressMail;
+    }
+
+    public void setFavoritesResto(List<String> favoritesResto) {
+        mFAVORITE_RESTO_LIST = favoritesResto;
     }
 }

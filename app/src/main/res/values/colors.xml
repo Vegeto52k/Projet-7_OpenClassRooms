@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue_facebook">#3c599c</color>
+    <color name="blue_android">#6200ee</color>
 </resources>

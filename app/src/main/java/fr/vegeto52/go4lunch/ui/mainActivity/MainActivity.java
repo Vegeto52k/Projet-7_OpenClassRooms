@@ -3,6 +3,7 @@ package fr.vegeto52.go4lunch.ui.mainActivity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -33,12 +34,12 @@ import fr.vegeto52.go4lunch.R;
 import fr.vegeto52.go4lunch.data.viewModelFactory.ViewModelFactory;
 import fr.vegeto52.go4lunch.databinding.ActivityMainBinding;
 import fr.vegeto52.go4lunch.model.User;
-import fr.vegeto52.go4lunch.ui.AuthenticationActivity;
-import fr.vegeto52.go4lunch.ui.DetailsRestaurantFragment;
-import fr.vegeto52.go4lunch.ui.listViewFragment.ListViewFragment;
-import fr.vegeto52.go4lunch.ui.mapViewFragment.MapViewFragment;
+import fr.vegeto52.go4lunch.ui.authenticationActivity.AuthenticationActivity;
+import fr.vegeto52.go4lunch.ui.mainActivity.detailsRestaurantFragment.DetailsRestaurantFragment;
+import fr.vegeto52.go4lunch.ui.mainActivity.listViewFragment.ListViewFragment;
+import fr.vegeto52.go4lunch.ui.mainActivity.mapViewFragment.MapViewFragment;
 import fr.vegeto52.go4lunch.ui.SettingsFragment;
-import fr.vegeto52.go4lunch.ui.workmatesViewFragment.WorkmatesViewFragment;
+import fr.vegeto52.go4lunch.ui.mainActivity.workmatesViewFragment.WorkmatesViewFragment;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 
@@ -57,10 +58,17 @@ public class MainActivity extends AppCompatActivity {
     private ListViewFragment mListViewFragment = null;
     private WorkmatesViewFragment mWorkmatesViewFragment = null;
 
+
+    public BottomNavigationView getBottomNavigationView(){
+        return mBottomNavigationView;
+    }
+
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mMapViewFragment = new MapViewFragment();
         mListViewFragment = new ListViewFragment();

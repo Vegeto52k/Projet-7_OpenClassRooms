@@ -1,4 +1,4 @@
-package fr.vegeto52.go4lunch.ui.listViewFragment;
+package fr.vegeto52.go4lunch.ui.mainActivity.listViewFragment;
 
 import android.location.Location;
 

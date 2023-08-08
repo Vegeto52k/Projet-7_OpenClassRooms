@@ -1,11 +1,13 @@
-package fr.vegeto52.go4lunch.ui;
+package fr.vegeto52.go4lunch.ui.authenticationActivity;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,10 +50,12 @@ public class AuthenticationActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ActivityResultLauncher<Intent> mGoogleSignInLauncher;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         initUi();
     }

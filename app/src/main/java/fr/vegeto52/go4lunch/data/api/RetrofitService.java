@@ -1,4 +1,4 @@
-package fr.vegeto52.go4lunch.data;
+package fr.vegeto52.go4lunch.data.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,9 +27,9 @@ public class RetrofitService {
                 .build();
 
         if(sRetrofit == null) {
-            String NEAR_BY_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/";
+            String BASE_URL = "https://maps.googleapis.com/maps/api/place/";
             sRetrofit = new Retrofit.Builder()
-                    .baseUrl(NEAR_BY_SEARCH_URL)
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(okHttpClient)
                     .build();

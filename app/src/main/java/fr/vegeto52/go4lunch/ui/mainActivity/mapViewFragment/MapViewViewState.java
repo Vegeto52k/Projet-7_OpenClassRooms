@@ -1,4 +1,4 @@
-package fr.vegeto52.go4lunch.ui.mapViewFragment;
+package fr.vegeto52.go4lunch.ui.mainActivity.mapViewFragment;
 
 import android.location.Location;
 

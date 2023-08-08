@@ -1,11 +1,8 @@
 package fr.vegeto52.go4lunch.data.repository;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -45,26 +42,35 @@ public class FirestoreRepository {
 
     // Get List Users and Current User
     public void getListUsersAndCurrentUser(){
-        getUsersCollection().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    QuerySnapshot querySnapshot = task.getResult();
-                    List<DocumentSnapshot> documentSnapshots = querySnapshot.getDocuments();
-                    for (DocumentSnapshot documentSnapshot : documentSnapshots){
-                        User user = documentSnapshot.toObject(User.class);
-                        String uid = documentSnapshot.getId();
-                        assert user != null;
-                        user.setUid(uid);
-                        mUserList.add(user);
-                        if (getUidCurrentUser().equals(user.getUid())){
-                            mCurrentUserMutableLiveData.setValue(user);
-                        }
+        getUsersCollection().get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                QuerySnapshot querySnapshot = task.getResult();
+                List<DocumentSnapshot> documentSnapshots = querySnapshot.getDocuments();
+                for (DocumentSnapshot documentSnapshot : documentSnapshots){
+                    User user = documentSnapshot.toObject(User.class);
+                    String uid = documentSnapshot.getId();
+                    assert user != null;
+                    user.setUid(uid);
+                    mUserList.add(user);
+                    if (getUidCurrentUser().equals(user.getUid())){
+                        mCurrentUserMutableLiveData.setValue(user);
                     }
-                    mListUsersMutableLiveData.setValue(mUserList);
                 }
+                mListUsersMutableLiveData.setValue(mUserList);
             }
         });
+    }
+
+    // Update User Selected Restaurant
+    public void setSelectedRestaurant(String placeId){
+        String currentUserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        getUsersCollection().document(currentUserId).update("selectedResto", placeId);
+    }
+
+    // Update User Favorites Restaurants
+    public void setFavoritesRestaurants(List<String> favoritesRestaurants){
+        String currentUserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        getUsersCollection().document(currentUserId).update("FAVORITE_RESTO_LIST", favoritesRestaurants);
     }
 
     // LiveData for List Users

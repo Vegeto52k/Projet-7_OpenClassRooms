@@ -54,4 +54,20 @@
     <string name="WVF_is_eating_at">%s mange chez %s</string>
     <string name="WVF_is_eating_at_a_distant_restaurant">%s mange dans un restaurant éloigné</string>
     <string name="WVF_has_not_decided_yet">%s n\'a pas encore choisi</string>
+
+    <!-- Details Restaurant Fragment -->
+    <string name="DRF_call">Appeler</string>
+    <string name="DRF_like">Aime</string>
+    <string name="DRF_dislike">N\'aime pas</string>
+    <string name="DRF_restaurant_added_to_favorites">Restaurant ajouté aux favoris</string>
+    <string name="DRF_restaurant_removed_from_favorites">Restaurant retiré des favoris</string>
+    <string name="DRF_website">Site internet</string>
+    <string name="DRF_no_website_provided">Aucun site internet renseigné</string>
+    <string name="DRF_content_description_photo_restaurant">Photo du restaurant</string>
+    <string name="DRF_content_description_star_1">Etoile 1</string>
+    <string name="DRF_content_description_star_2">Etoile 2</string>
+    <string name="DRF_content_description_star_3">Etoile 3</string>
+    <string name="DRF_content_description_check_resto_selected">Bouton de sélection de restaurant</string>
+    <string name="DRF_no_phone_number_provided">Aucun numéro de téléphone renseigné</string>
+    <string name="DRF_is_joining">%s rejoint !</string>
 </resources>

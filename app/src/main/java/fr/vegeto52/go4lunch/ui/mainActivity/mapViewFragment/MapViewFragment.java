@@ -1,6 +1,7 @@
-package fr.vegeto52.go4lunch.ui.mapViewFragment;
+package fr.vegeto52.go4lunch.ui.mainActivity.mapViewFragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.appcompat.widget.SearchView;
@@ -25,6 +27,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +38,8 @@ import fr.vegeto52.go4lunch.data.viewModelFactory.ViewModelFactory;
 import fr.vegeto52.go4lunch.databinding.FragmentMapViewBinding;
 import fr.vegeto52.go4lunch.model.Restaurant;
 import fr.vegeto52.go4lunch.model.User;
-import fr.vegeto52.go4lunch.ui.DetailsRestaurantFragment;
+import fr.vegeto52.go4lunch.ui.mainActivity.MainActivity;
+import fr.vegeto52.go4lunch.ui.mainActivity.detailsRestaurantFragment.DetailsRestaurantFragment;
 
 public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
@@ -48,6 +52,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     private List<User> mListUsers;
     private String mPlaceId;
     private final List<Marker> mMarkerList = new ArrayList<>();
+    private BottomNavigationView mBottomNavigationView;
 
 
     @Override
@@ -94,9 +99,24 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity){
+            MainActivity activity = (MainActivity) context;
+            mBottomNavigationView = activity.getBottomNavigationView();
+        }
+    }
+
+    @Override
     public void onResume() {
         mMapView.onResume();
         super.onResume();
+        if (isAdded() && isVisible()) {
+            if (mBottomNavigationView != null) {
+                mBottomNavigationView.setVisibility(View.VISIBLE);
+            }
+        }
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
     }
 
     @Override

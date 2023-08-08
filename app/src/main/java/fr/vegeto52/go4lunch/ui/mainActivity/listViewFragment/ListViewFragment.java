@@ -1,6 +1,7 @@
-package fr.vegeto52.go4lunch.ui.listViewFragment;
+package fr.vegeto52.go4lunch.ui.mainActivity.listViewFragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,15 +21,19 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import fr.vegeto52.go4lunch.R;
 import fr.vegeto52.go4lunch.data.viewModelFactory.ViewModelFactory;
 import fr.vegeto52.go4lunch.databinding.FragmentListViewBinding;
 import fr.vegeto52.go4lunch.model.Restaurant;
 import fr.vegeto52.go4lunch.model.User;
+import fr.vegeto52.go4lunch.ui.mainActivity.MainActivity;
 
 
 public class ListViewFragment extends Fragment {
@@ -37,7 +43,8 @@ public class ListViewFragment extends Fragment {
     private List<Restaurant.Results> mListRestaurants;
     private List<User> mListUsers;
     private FragmentListViewBinding mBinding;
-    private List<Restaurant.Results> mFilteredListRestaurants;
+    private List<Restaurant.Results> mFilteredListRestaurants = new ArrayList<>();
+    private BottomNavigationView mBottomNavigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,27 @@ public class ListViewFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.LVF_recyclerview_list_resto);
         return view;
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity){
+            MainActivity activity = (MainActivity) context;
+            mBottomNavigationView = activity.getBottomNavigationView();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isAdded() && isVisible()) {
+            if (mBottomNavigationView != null) {
+                mBottomNavigationView.setVisibility(View.VISIBLE);
+            }
+        }
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
+    }
+
 
     // Initialize ViewModel
     private void initViewModel(){
@@ -114,6 +142,7 @@ public class ListViewFragment extends Fragment {
             listViewAdapter = new ListViewAdapter(mLocation, mFilteredListRestaurants, mListUsers);
             mRecyclerView.setAdapter(listViewAdapter);
         } else {
+            mFilteredListRestaurants = mListRestaurants;
             listViewAdapter = new ListViewAdapter(mLocation, mListRestaurants, mListUsers);
             mRecyclerView.setAdapter(listViewAdapter);
         }
@@ -224,6 +253,5 @@ public class ListViewFragment extends Fragment {
             ListViewAdapter listViewAdapter = new ListViewAdapter(mLocation, mFilteredListRestaurants, mListUsers);
             mRecyclerView.setAdapter(listViewAdapter);
         }
-
     }
 }

@@ -25,12 +25,12 @@
         <activity
             android:name=".ui.mainActivity.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Go4Lunch.NoActionBar"/>
+            android:theme="@style/Theme.Go4Lunch.NoActionBar" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCuiuuSU0l2xgi-bWz_gYHM1EkZJeuWmx4" />
         <activity
-            android:name=".ui.AuthenticationActivity"
+            android:name=".ui.authenticationActivity.AuthenticationActivity"
             android:exported="true"
             android:theme="@style/Theme.Go4Lunch.NoActionBar">
             <intent-filter>

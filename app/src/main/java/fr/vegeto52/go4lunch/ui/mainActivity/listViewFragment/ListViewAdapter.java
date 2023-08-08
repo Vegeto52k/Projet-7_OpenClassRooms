@@ -1,4 +1,4 @@
-package fr.vegeto52.go4lunch.ui.listViewFragment;
+package fr.vegeto52.go4lunch.ui.mainActivity.listViewFragment;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -23,7 +23,7 @@ import java.util.Locale;
 import fr.vegeto52.go4lunch.R;
 import fr.vegeto52.go4lunch.model.Restaurant;
 import fr.vegeto52.go4lunch.model.User;
-import fr.vegeto52.go4lunch.ui.DetailsRestaurantFragment;
+import fr.vegeto52.go4lunch.ui.mainActivity.detailsRestaurantFragment.DetailsRestaurantFragment;
 
 /**
  * Created by Vegeto52-PC on 01/08/2023.
@@ -115,6 +115,8 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
         }
 
         public void displayRestaurant(Restaurant.Results results){
+            // Get PlaceId
+            mPlaceId = results.getPlace_id();
             // Show name
             mNameRestaurant.setText(results.getName());
             // Show address

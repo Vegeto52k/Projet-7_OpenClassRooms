@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.listViewFragment.ListViewFragment">
+    tools:context=".ui.mainActivity.listViewFragment.ListViewFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/LVF_recyclerview_list_resto"

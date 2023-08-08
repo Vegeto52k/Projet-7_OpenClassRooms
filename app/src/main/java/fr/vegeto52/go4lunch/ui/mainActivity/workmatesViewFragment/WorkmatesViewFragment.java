@@ -1,5 +1,6 @@
-package fr.vegeto52.go4lunch.ui.workmatesViewFragment;
+package fr.vegeto52.go4lunch.ui.mainActivity.workmatesViewFragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,20 +8,25 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import fr.vegeto52.go4lunch.R;
 import fr.vegeto52.go4lunch.data.viewModelFactory.ViewModelFactory;
 import fr.vegeto52.go4lunch.databinding.FragmentWorkmatesViewBinding;
 import fr.vegeto52.go4lunch.model.Restaurant;
 import fr.vegeto52.go4lunch.model.User;
+import fr.vegeto52.go4lunch.ui.mainActivity.MainActivity;
 
 public class WorkmatesViewFragment extends Fragment {
 
@@ -29,6 +35,7 @@ public class WorkmatesViewFragment extends Fragment {
     RecyclerView mRecyclerView;
     List<User> mListUsers = new ArrayList<>();
     List<Restaurant.Results> mListRestaurants = new ArrayList<>();
+    private BottomNavigationView mBottomNavigationView;
 
 
     @Override
@@ -51,6 +58,27 @@ public class WorkmatesViewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViewModel();
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity){
+            MainActivity activity = (MainActivity) context;
+            mBottomNavigationView = activity.getBottomNavigationView();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isAdded() && isVisible()) {
+            if (mBottomNavigationView != null) {
+                mBottomNavigationView.setVisibility(View.VISIBLE);
+            }
+        }
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
+    }
+
 
     private void initViewModel(){
         ViewModelFactory viewModelFactory = ViewModelFactory.getInstance();

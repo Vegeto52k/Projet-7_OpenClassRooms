@@ -63,5 +63,20 @@
     <string name="WVF_is_eating_at">%s is eating at %s</string>
     <string name="WVF_is_eating_at_a_distant_restaurant">%s is eating at a distant restaurant</string>
     <string name="WVF_has_not_decided_yet">%s hasn\'t decided yet</string>
-
+    
+    <!-- Details Restaurant Fragment -->
+    <string name="DRF_call">Call</string>
+    <string name="DRF_like">Like</string>
+    <string name="DRF_dislike">Dislike</string>
+    <string name="DRF_restaurant_added_to_favorites">Restaurant added to favorites</string>
+    <string name="DRF_restaurant_removed_from_favorites">Restaurant removed from favorites</string>
+    <string name="DRF_website">Website</string>
+    <string name="DRF_no_website_provided">No website provided</string>
+    <string name="DRF_content_description_photo_restaurant">Photo restaurant</string>
+    <string name="DRF_content_description_star_1">Star 1</string>
+    <string name="DRF_content_description_star_2">Star 2</string>
+    <string name="DRF_content_description_star_3">Star 3</string>
+    <string name="DRF_content_description_check_resto_selected">Check button for restaurant selected</string>
+    <string name="DRF_no_phone_number_provided">No phone number provided</string>
+    <string name="DRF_is_joining">%s is joining !</string>
 </resources>
