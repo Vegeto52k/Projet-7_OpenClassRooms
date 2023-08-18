@@ -73,6 +73,12 @@ public class FirestoreRepository {
         getUsersCollection().document(currentUserId).update("FAVORITE_RESTO_LIST", favoritesRestaurants);
     }
 
+    // Update Notification activation
+    public void setNotifications(boolean notifications){
+        String currentUserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        getUsersCollection().document(currentUserId).update("notifications", notifications);
+    }
+
     // LiveData for List Users
     public LiveData<List<User>> getListUsersMutableLiveData(){
         return mListUsersMutableLiveData;
@@ -82,4 +88,5 @@ public class FirestoreRepository {
     public LiveData<User> getCurrentUserMutableLiveData(){
         return mCurrentUserMutableLiveData;
     }
+
 }

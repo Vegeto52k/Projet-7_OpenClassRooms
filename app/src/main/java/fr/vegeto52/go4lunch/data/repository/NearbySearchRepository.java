@@ -1,7 +1,6 @@
 package fr.vegeto52.go4lunch.data.repository;
 
 import android.location.Location;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -9,8 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import fr.vegeto52.go4lunch.data.api.RetrofitService;
 import fr.vegeto52.go4lunch.data.api.NearbySearchApi;
+import fr.vegeto52.go4lunch.data.api.RetrofitService;
 import fr.vegeto52.go4lunch.model.Restaurant;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,7 +29,6 @@ public class NearbySearchRepository {
     private final MutableLiveData<List<Restaurant.Results>> mListRestaurantMutableLiveData = new MutableLiveData<>();
 
 
-
     public NearbySearchRepository(){
 
     }
@@ -41,8 +39,6 @@ public class NearbySearchRepository {
         mCurrentLatitude = location.getLatitude();
         mCurrentLongitude = location.getLongitude();
         mLatLng = "" + mCurrentLatitude + "," + mCurrentLongitude;
-
-        Log.d("NearbySearchRepository", "getNearbySearch lancé");
 
         nearbySearchApi.getObjectRestaurant(mLatLng, radius, type, map_key).enqueue(new Callback<Restaurant>() {
             @Override

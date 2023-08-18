@@ -3,7 +3,6 @@ package fr.vegeto52.go4lunch.data.repository;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,7 +19,6 @@ import fr.vegeto52.go4lunch.data.MainApplication;
 public class LocationRepository {
 
     private final MutableLiveData<Location> mLocationMutableLiveData = new MutableLiveData<>();
-
     FusedLocationProviderClient mFusedLocationProviderClient;
 
     public LocationRepository() {
@@ -34,12 +32,11 @@ public class LocationRepository {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
         Task<Location> task = mFusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(mLocationMutableLiveData::setValue);
-
-        Log.d("LocationRepository", "getLocation lancé");
     }
 
     // LiveData for Location
     public LiveData<Location> getLocationLiveData(){
         return mLocationMutableLiveData;
     }
+
 }

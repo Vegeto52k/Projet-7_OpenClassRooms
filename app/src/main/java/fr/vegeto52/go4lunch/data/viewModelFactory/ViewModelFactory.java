@@ -12,6 +12,8 @@ import fr.vegeto52.go4lunch.ui.mainActivity.MainActivityViewModel;
 import fr.vegeto52.go4lunch.ui.mainActivity.detailsRestaurantFragment.DetailsRestaurantViewModel;
 import fr.vegeto52.go4lunch.ui.mainActivity.listViewFragment.ListViewViewModel;
 import fr.vegeto52.go4lunch.ui.mainActivity.mapViewFragment.MapViewViewModel;
+import fr.vegeto52.go4lunch.ui.mainActivity.settingsFragment.SettingsFragment;
+import fr.vegeto52.go4lunch.ui.mainActivity.settingsFragment.SettingsFragmentViewModel;
 import fr.vegeto52.go4lunch.ui.mainActivity.workmatesViewFragment.WorkmatesViewViewModel;
 
 /**
@@ -64,6 +66,9 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         }
         if (modelClass.isAssignableFrom(DetailsRestaurantViewModel.class)){
             return (T) new DetailsRestaurantViewModel(mFirestoreRepository, mNearbySearchRepository, mPlaceDetailsRepository);
+        }
+        if (modelClass.isAssignableFrom(SettingsFragmentViewModel.class)){
+            return (T) new SettingsFragmentViewModel(mFirestoreRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

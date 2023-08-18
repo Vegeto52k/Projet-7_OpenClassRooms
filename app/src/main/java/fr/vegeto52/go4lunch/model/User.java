@@ -18,19 +18,21 @@ public class User {
     private String mSelectedResto;
     private String mAdressMail;
     private List<String> mFAVORITE_RESTO_LIST = new ArrayList<>();
+    private boolean mNotifications;
 
 
     public User() {
     }
 
     //Constructor
-    public User(String uid, String userName, @Nullable String urlPhoto, @Nullable String selectedResto, String adressMail, List<String> FAVORITE_RESTO_LIST) {
+    public User(String uid, String userName, @Nullable String urlPhoto, @Nullable String selectedResto, String adressMail, List<String> FAVORITE_RESTO_LIST, boolean notifications) {
         mUid = uid;
         mUserName = userName;
         mUrlPhoto = urlPhoto;
         mSelectedResto = selectedResto;
         mAdressMail = adressMail;
         mFAVORITE_RESTO_LIST = FAVORITE_RESTO_LIST;
+        mNotifications = notifications;
     }
 
     //Getters
@@ -83,5 +85,13 @@ public class User {
 
     public void setFavoritesResto(List<String> favoritesResto) {
         mFAVORITE_RESTO_LIST = favoritesResto;
+    }
+
+    public boolean isNotifications() {
+        return mNotifications;
+    }
+
+    public void setNotifications(boolean notifications) {
+        mNotifications = notifications;
     }
 }

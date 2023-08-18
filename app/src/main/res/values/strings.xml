@@ -79,4 +79,13 @@
     <string name="DRF_content_description_check_resto_selected">Check button for restaurant selected</string>
     <string name="DRF_no_phone_number_provided">No phone number provided</string>
     <string name="DRF_is_joining">%s is joining !</string>
+    
+    <!-- Notification Service -->
+    <string name="NS_recap_for_lunch">Recap for lunch</string>
+    <string name="NS_info_lunch">\nYou have chosen to eat at %s.\n\nHere is the address of the restaurant : %s.\n\nHere is the list of people going to this restaurant : \n%s</string>
+
+    <!-- Settings Fragment -->
+    <string name="SF_settings">Settings</string>
+    <string name="SF_notifications">Notifications</string>
+    <string name="SF_content_description_logo_settings">Logo settings</string>
 </resources>

@@ -38,7 +38,7 @@ import fr.vegeto52.go4lunch.ui.authenticationActivity.AuthenticationActivity;
 import fr.vegeto52.go4lunch.ui.mainActivity.detailsRestaurantFragment.DetailsRestaurantFragment;
 import fr.vegeto52.go4lunch.ui.mainActivity.listViewFragment.ListViewFragment;
 import fr.vegeto52.go4lunch.ui.mainActivity.mapViewFragment.MapViewFragment;
-import fr.vegeto52.go4lunch.ui.SettingsFragment;
+import fr.vegeto52.go4lunch.ui.mainActivity.settingsFragment.SettingsFragment;
 import fr.vegeto52.go4lunch.ui.mainActivity.workmatesViewFragment.WorkmatesViewFragment;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;

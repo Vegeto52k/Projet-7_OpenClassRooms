@@ -70,4 +70,13 @@
     <string name="DRF_content_description_check_resto_selected">Bouton de sélection de restaurant</string>
     <string name="DRF_no_phone_number_provided">Aucun numéro de téléphone renseigné</string>
     <string name="DRF_is_joining">%s rejoint !</string>
+
+    <!-- Notification Service -->
+    <string name="NS_recap_for_lunch">Récapitulatif pour le déjeuner</string>
+    <string name="NS_info_lunch">\nVous avez choisi de manger chez %s.\n\nVoici l\'adresse du restaurant : %s.\n\nVoici la liste des personnes allant dans ce restaurant : \n%s</string>
+
+    <!-- Settings Fragment -->
+    <string name="SF_settings">Paramètres</string>
+    <string name="SF_notifications">Notifications</string>
+    <string name="SF_content_description_logo_settings">Logo paramètres</string>
 </resources>

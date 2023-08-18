@@ -151,6 +151,11 @@ public class AuthenticationActivity extends AppCompatActivity {
                                 } else {
                                     userDoc.put("FAVORITE_RESTO_LIST", new ArrayList<String>());
                                 }
+                                if (documentSnapshot.contains("notifications")){
+                                    userDoc.put("notifications", documentSnapshot.get("notifications"));
+                                } else {
+                                    userDoc.put("notifications", true);
+                                }
                                 usersRef.document(uid).update(userDoc).addOnSuccessListener(unused -> signInSuccesNewActivity());
                             } else {
                                 Map<String, Object> userDoc = new HashMap<>();
@@ -159,6 +164,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                                 userDoc.put("adressMail", adressMail);
                                 userDoc.put("selectedResto", "");
                                 userDoc.put("FAVORITE_RESTO_LIST", new ArrayList<String>());
+                                userDoc.put("notifications", true);
                                 usersRef.document(uid).set(userDoc).addOnSuccessListener(unused -> signInSuccesNewActivity());
                             }
                         });
