@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue_facebook">#3c599c</color>
     <color name="blue_android">#6200ee</color>
+    <color name="orange">#f67042</color>
+    <color name="orange_2">#f5331c</color>
+    <color name="gray">#afafaf</color>
 </resources>

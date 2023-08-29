@@ -24,7 +24,7 @@ public class DetailsRestaurantViewModel extends ViewModel {
     FirestoreRepository mFirestoreRepository;
     PlaceDetailsRepository mPlaceDetailsRepository;
 
-    public DetailsRestaurantViewModel(FirestoreRepository firestoreRepository, NearbySearchRepository nearbySearchRepository, PlaceDetailsRepository placeDetailsRepository){
+    public DetailsRestaurantViewModel(FirestoreRepository firestoreRepository, NearbySearchRepository nearbySearchRepository, PlaceDetailsRepository placeDetailsRepository) {
 
         mFirestoreRepository = firestoreRepository;
         mPlaceDetailsRepository = placeDetailsRepository;
@@ -38,30 +38,30 @@ public class DetailsRestaurantViewModel extends ViewModel {
         mMediatorLiveData.addSource(listRestaurants, listRestaurants1 -> combine(listUsers.getValue(), currentUser.getValue(), listRestaurants1));
     }
 
-    private void combine(List<User> userList, User currentUser, List<Restaurant.Results> restaurantList){
-        if (userList != null && currentUser != null && restaurantList != null){
+    private void combine(List<User> userList, User currentUser, List<Restaurant.Results> restaurantList) {
+        if (userList != null && currentUser != null && restaurantList != null) {
             mMediatorLiveData.setValue(new DetailsRestaurantViewState(userList, currentUser, restaurantList));
         }
     }
 
-    public void getPlaceDetails(String placeId){
+    public void getPlaceDetails(String placeId) {
         mPlaceDetailsRepository.getRestaurantDetails(placeId);
         mPlaceDetailsRepository.getRestaurantDetailsLiveData().observeForever(mRestaurantDetailsMutableLiveData::setValue);
     }
 
-    public void setSelectedRestaurant(String placeId){
+    public void setSelectedRestaurant(String placeId) {
         mFirestoreRepository.setSelectedRestaurant(placeId);
     }
 
-    public void setFavoritesRestaurant(List<String> favoritesResto){
+    public void setFavoritesRestaurant(List<String> favoritesResto) {
         mFirestoreRepository.setFavoritesRestaurants(favoritesResto);
     }
 
-    public LiveData<DetailsRestaurantViewState> getViewModelDetailsRestaurantLiveData(){
+    public LiveData<DetailsRestaurantViewState> getViewModelDetailsRestaurantLiveData() {
         return mMediatorLiveData;
     }
 
-    public LiveData<RestaurantDetails.Result> getDetailsRestaurantLiveData(){
+    public LiveData<RestaurantDetails.Result> getDetailsRestaurantLiveData() {
         return mRestaurantDetailsMutableLiveData;
     }
 }

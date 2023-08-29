@@ -62,7 +62,7 @@ public class WorkmatesViewFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof MainActivity){
+        if (context instanceof MainActivity) {
             MainActivity activity = (MainActivity) context;
             mBottomNavigationView = activity.getBottomNavigationView();
         }
@@ -80,7 +80,8 @@ public class WorkmatesViewFragment extends Fragment {
     }
 
 
-    private void initViewModel(){
+    // Intialize ViewModel
+    private void initViewModel() {
         ViewModelFactory viewModelFactory = ViewModelFactory.getInstance();
         mWorkmatesViewViewModel = new ViewModelProvider(this, viewModelFactory).get(WorkmatesViewViewModel.class);
         mWorkmatesViewViewModel.getWorkmatesViewLiveData().observe(getViewLifecycleOwner(), workmatesViewViewState -> {
@@ -91,7 +92,8 @@ public class WorkmatesViewFragment extends Fragment {
         });
     }
 
-    private void initRecyclerView(){
+    // Initialize RecyclerView
+    private void initRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         WorkmatesViewAdapter workmatesViewAdapter = new WorkmatesViewAdapter(mListUsers, mListRestaurants);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireContext(), layoutManager.getOrientation());

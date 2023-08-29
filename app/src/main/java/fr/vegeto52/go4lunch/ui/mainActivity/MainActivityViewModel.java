@@ -28,7 +28,7 @@ public class MainActivityViewModel extends ViewModel {
         }
     }
 
-    public LiveData<MainActivityViewState> getCurrentUserLiveData (){
+    public LiveData<MainActivityViewState> getCurrentUserLiveData() {
         return mMediatorLiveData;
     }
 }

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.media.RingtoneManager;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -60,20 +61,21 @@ public class NotificationService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
-        if (message.getNotification() != null){
+        if (message.getNotification() != null) {
+            Log.d("Notification Reçu", "J'ai bien reçu " + message.getNotification().getBody());
             getListUserAndCurrentUser();
         }
     }
 
     @SuppressLint("MissingPermission")
-    private void getLocation(){
+    private void getLocation() {
         Context context = MainApplication.getApplication();
         FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(this::getListRestaurants);
     }
 
-    private void getListRestaurants(Location location){
+    private void getListRestaurants(Location location) {
         NearbySearchApi nearbySearchApi = RetrofitService.getRetrofitInstance().create(NearbySearchApi.class);
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
@@ -98,19 +100,19 @@ public class NotificationService extends FirebaseMessagingService {
         });
     }
 
-    private void getListUserAndCurrentUser(){
+    private void getListUserAndCurrentUser() {
         String uidCurrentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         FirebaseFirestore.getInstance().collection(COLLECTION_NAME).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
+            if (task.isSuccessful()) {
                 QuerySnapshot querySnapshot = task.getResult();
                 List<DocumentSnapshot> documentSnapshots = querySnapshot.getDocuments();
-                for (DocumentSnapshot documentSnapshot : documentSnapshots){
+                for (DocumentSnapshot documentSnapshot : documentSnapshots) {
                     User user = documentSnapshot.toObject(User.class);
                     String uid = documentSnapshot.getId();
                     assert user != null;
                     user.setUid(uid);
                     mUserList.add(user);
-                    if (uidCurrentUser.equals(user.getUid())){
+                    if (uidCurrentUser.equals(user.getUid())) {
                         mUser = user;
                     }
                 }
@@ -120,28 +122,28 @@ public class NotificationService extends FirebaseMessagingService {
         });
     }
 
-    private void getInformationsRestaurant(){
+    private void getInformationsRestaurant() {
         String placeId = mUser.getSelectedResto();
-        for (Restaurant.Results restaurant : mRestaurantList){
-            if (restaurant.getPlace_id().equals(placeId)){
+        for (Restaurant.Results restaurant : mRestaurantList) {
+            if (restaurant.getPlace_id().equals(placeId)) {
                 mNameRestaurant = restaurant.getName();
                 mAddressRestaurant = restaurant.getVicinity();
                 break;
             }
         }
         mListUserWithSameRestaurant.clear();
-        for (User user : mUserList){
+        for (User user : mUserList) {
             assert user.getSelectedResto() != null;
-            if (user.getSelectedResto().equals(placeId)){
+            if (user.getSelectedResto().equals(placeId)) {
                 mListUserWithSameRestaurant.add(user);
             }
         }
     }
 
-    private void sendVisualNotification(){
+    private void sendVisualNotification() {
         // Create an Intent that will be shown when user will click on the Notification
         Intent intent = new Intent(this, AuthenticationActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(NotificationService.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(NotificationService.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         // Build a Notification object
         String CHANNEL_ID = "Go4Lunch";
@@ -154,7 +156,7 @@ public class NotificationService extends FirebaseMessagingService {
                         .setContentIntent(pendingIntent);
 
         StringBuilder userNamesBuilder = new StringBuilder();
-        for (User user : mListUserWithSameRestaurant){
+        for (User user : mListUserWithSameRestaurant) {
             userNamesBuilder.append(user.getUserName()).append("\n");
         }
         String userNamesString = userNamesBuilder.toString();
@@ -165,7 +167,6 @@ public class NotificationService extends FirebaseMessagingService {
         notificationBuilder.setStyle(bigTextStyle);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
 
 
         // Support Version >= Android 8

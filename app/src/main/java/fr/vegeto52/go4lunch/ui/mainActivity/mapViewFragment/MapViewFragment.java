@@ -76,7 +76,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     }
 
     // Initialize ViewModel
-    private void initViewModel(){
+    private void initViewModel() {
         ViewModelFactory viewModelFactory = ViewModelFactory.getInstance();
         MapViewViewModel mapViewViewModel = new ViewModelProvider(this, viewModelFactory).get(MapViewViewModel.class);
         mapViewViewModel.getMapViewLiveData().observe(getViewLifecycleOwner(), mapViewViewState -> {
@@ -101,7 +101,7 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof MainActivity){
+        if (context instanceof MainActivity) {
             MainActivity activity = (MainActivity) context;
             mBottomNavigationView = activity.getBottomNavigationView();
         }
@@ -138,16 +138,18 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     }
 
     // Button for center map
-    private void centerCameraPosition(){
+    private void centerCameraPosition() {
         mButtonCenterMap.setOnClickListener(view -> mMap.moveCamera(CameraUpdateFactory.newLatLng(mUserLocation)));
     }
 
     // Add User Marker
-    private void addUserMarker(){
+    private void addUserMarker() {
         double userLatitude = mLocation.getLatitude();
         double userLongitude = mLocation.getLongitude();
         mUserLocation = new LatLng(userLatitude, userLongitude);
-        mMap.addMarker(new MarkerOptions().position(mUserLocation).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        Marker userMarker = mMap.addMarker(new MarkerOptions().position(mUserLocation).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        assert userMarker != null;
+        userMarker.setTag(null);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(mUserLocation));
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mUserLocation, 17);
         mMap.animateCamera(cameraUpdate);
@@ -155,19 +157,19 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     }
 
     // Add Marker Restaurants
-    private void markersToResto(){
+    private void markersToResto() {
         List<String> selectedRestos = new ArrayList<>();
-        for (User user : mListUsers){
+        for (User user : mListUsers) {
             String selectedResto = user.getSelectedResto();
-            if (selectedResto != null){
+            if (selectedResto != null) {
                 selectedRestos.add(selectedResto);
             }
         }
-        for (Restaurant.Results restaurant : mListRestaurants){
+        for (Restaurant.Results restaurant : mListRestaurants) {
             mPlaceId = restaurant.getPlace_id();
             LatLng restaurantLocation = new LatLng(restaurant.getGeometry().getLocation().getLat(), restaurant.getGeometry().getLocation().getLng());
             MarkerOptions markerOptions;
-            if (selectedRestos.contains(mPlaceId)){
+            if (selectedRestos.contains(mPlaceId)) {
                 markerOptions = new MarkerOptions()
                         .position(restaurantLocation)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
@@ -182,19 +184,21 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
             mMarkerList.add(marker);
         }
         mMap.setOnMarkerClickListener(marker -> {
-            mPlaceId = Objects.requireNonNull(marker.getTag()).toString();
-            Fragment fragment = new DetailsRestaurantFragment();
-            Bundle args = new Bundle();
-            args.putString("placeId", mPlaceId);
-            fragment.setArguments(args);
-            getParentFragmentManager().beginTransaction()
-                    .replace(R.id.MA_fragment_container, fragment)
-                    .addToBackStack(null)
-                    .commit();
-            return true;
+            if (marker.getTag() != null ){
+                mPlaceId = Objects.requireNonNull(marker.getTag()).toString();
+                Fragment fragment = new DetailsRestaurantFragment();
+                Bundle args = new Bundle();
+                args.putString("placeId", mPlaceId);
+                fragment.setArguments(args);
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.MA_fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+                return true;
+            }
+            return false;
         });
     }
-
 
 
     // Search menu
@@ -212,8 +216,8 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if (s.length() >= 3){
-                    for (Marker marker : mMarkerList){
+                if (s.length() >= 3) {
+                    for (Marker marker : mMarkerList) {
                         marker.remove();
                     }
                     mMarkerList.clear();
@@ -228,20 +232,20 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
     }
 
     // Perform Search
-    private void performSearch(String text){
+    private void performSearch(String text) {
         List<String> selectedRestos = new ArrayList<>();
-        for (User user : mListUsers){
+        for (User user : mListUsers) {
             String selectedResto = user.getSelectedResto();
-            if (selectedResto != null){
+            if (selectedResto != null) {
                 selectedRestos.add(selectedResto);
             }
         }
-        for (Restaurant.Results restaurant : mListRestaurants){
-            if (restaurant.getName().toLowerCase().contains(text.toLowerCase())){
+        for (Restaurant.Results restaurant : mListRestaurants) {
+            if (restaurant.getName().toLowerCase().contains(text.toLowerCase())) {
                 mPlaceId = restaurant.getPlace_id();
                 LatLng restaurantLocation = new LatLng(restaurant.getGeometry().getLocation().getLat(), restaurant.getGeometry().getLocation().getLng());
                 MarkerOptions markerOptions;
-                if (selectedRestos.contains(mPlaceId)){
+                if (selectedRestos.contains(mPlaceId)) {
                     markerOptions = new MarkerOptions()
                             .position(restaurantLocation)
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
@@ -256,16 +260,19 @@ public class MapViewFragment extends Fragment implements OnMapReadyCallback {
                 mMarkerList.add(marker);
             }
             mMap.setOnMarkerClickListener(marker -> {
-                mPlaceId = Objects.requireNonNull(marker.getTag()).toString();
-                Fragment fragment = new DetailsRestaurantFragment();
-                Bundle args = new Bundle();
-                args.putString("placeId", mPlaceId);
-                fragment.setArguments(args);
-                getParentFragmentManager().beginTransaction()
-                        .replace(R.id.MA_fragment_container, fragment)
-                        .addToBackStack(null)
-                        .commit();
-                return true;
+                if (marker.getTag() != null ){
+                    mPlaceId = Objects.requireNonNull(marker.getTag()).toString();
+                    Fragment fragment = new DetailsRestaurantFragment();
+                    Bundle args = new Bundle();
+                    args.putString("placeId", mPlaceId);
+                    fragment.setArguments(args);
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.MA_fragment_container, fragment)
+                            .addToBackStack(null)
+                            .commit();
+                    return true;
+                }
+                return false;
             });
         }
     }

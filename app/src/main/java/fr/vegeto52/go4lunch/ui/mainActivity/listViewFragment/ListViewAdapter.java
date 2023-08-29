@@ -66,7 +66,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
             Bundle args = new Bundle();
             args.putString("placeId", holder.mPlaceId);
             fragment.setArguments(args);
-            if (view.getContext() instanceof AppCompatActivity){
+            if (view.getContext() instanceof AppCompatActivity) {
                 ((AppCompatActivity) view.getContext()).getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.MA_fragment_container, fragment)
@@ -81,7 +81,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
         return mListRestaurants.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mNameRestaurant;
         public TextView mAddressRestaurant;
@@ -114,7 +114,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
             mContext = itemView.getContext();
         }
 
-        public void displayRestaurant(Restaurant.Results results){
+        public void displayRestaurant(Restaurant.Results results) {
             // Get PlaceId
             mPlaceId = results.getPlace_id();
             // Show name
@@ -122,11 +122,11 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
             // Show address
             mAddressRestaurant.setText(results.getVicinity());
             // Show open/close
-            if (results.getOpening_hours() == null){
+            if (results.getOpening_hours() == null) {
                 mOpenHour.setText(mContext.getString(R.string.LVF_no_information));
                 mOpenHour.setTextColor(Color.BLUE);
             } else {
-                if (results.getOpening_hours().getOpen_now()){
+                if (results.getOpening_hours().getOpen_now()) {
                     mOpenHour.setText(mContext.getString(R.string.LVF_open));
                 } else {
                     mOpenHour.setText(mContext.getString(R.string.LVF_close));
@@ -137,17 +137,17 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
             mLocation = new Location("");
             mLocation.setLatitude(results.getGeometry().getLocation().getLat());
             mLocation.setLongitude(results.getGeometry().getLocation().getLng());
-            if (mUserLocation != null){
+            if (mUserLocation != null) {
                 float distanceUserRestaurant = mUserLocation.distanceTo(mLocation);
                 mDistance.setText(String.format(Locale.US, "%.0f m", distanceUserRestaurant));
                 results.setDistance(distanceUserRestaurant);
             }
             // Show user's number
-            if (mListUser != null){
+            if (mListUser != null) {
                 int count = 0;
-                for (User user : mListUser){
-                    if (user.getSelectedResto() != null){
-                        if (user.getSelectedResto().equals(results.getPlace_id())){
+                for (User user : mListUser) {
+                    if (user.getSelectedResto() != null) {
+                        if (user.getSelectedResto().equals(results.getPlace_id())) {
                             count++;
                         }
                     }
@@ -159,7 +159,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
             }
             // Show rating
             mRating = results.getRating();
-            if (mRating <= 1.25){
+            if (mRating <= 1.25) {
                 mIconStarRating1.setVisibility(View.GONE);
                 mIconStarRating2.setVisibility(View.GONE);
                 mIconStarRating3.setVisibility(View.GONE);

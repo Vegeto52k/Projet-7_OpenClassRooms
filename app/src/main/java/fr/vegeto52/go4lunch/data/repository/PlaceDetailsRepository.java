@@ -25,7 +25,7 @@ public class PlaceDetailsRepository {
     }
 
     // Get Restaurant Details
-    public void getRestaurantDetails(String placeId){
+    public void getRestaurantDetails(String placeId) {
         PlaceDetailsApi placeDetailsApi = RetrofitService.getRetrofitInstance().create(PlaceDetailsApi.class);
         placeDetailsApi.getDetails(placeId, mFields, mKey).enqueue(new Callback<RestaurantDetails>() {
             @Override
@@ -41,7 +41,7 @@ public class PlaceDetailsRepository {
         });
     }
 
-    public LiveData<RestaurantDetails.Result> getRestaurantDetailsLiveData(){
+    public LiveData<RestaurantDetails.Result> getRestaurantDetailsLiveData() {
         return mRestaurantDetailsMutableLiveData;
     }
 }

@@ -52,7 +52,7 @@ public class DetailsRestaurantAdapter extends RecyclerView.Adapter<DetailsRestau
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CircleImageView mPhotoPeople;
         public TextView mNamePeople;
@@ -65,7 +65,7 @@ public class DetailsRestaurantAdapter extends RecyclerView.Adapter<DetailsRestau
             mContext = itemView.getContext();
         }
 
-        public void displayPeopleRestaurantDetails(User user){
+        public void displayPeopleRestaurantDetails(User user) {
             String fullName = user.getUserName();
             String[] nameParts = fullName.split(" ");
             String firstName = nameParts[0];

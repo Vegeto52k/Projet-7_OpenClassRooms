@@ -30,6 +30,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 import fr.vegeto52.go4lunch.R;
 import fr.vegeto52.go4lunch.data.viewModelFactory.ViewModelFactory;
 import fr.vegeto52.go4lunch.databinding.ActivityMainBinding;
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private WorkmatesViewFragment mWorkmatesViewFragment = null;
 
 
-    public BottomNavigationView getBottomNavigationView(){
+    public BottomNavigationView getBottomNavigationView() {
         return mBottomNavigationView;
     }
 
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             initUI();
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
     }
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Initialize UI
-    private void initUI(){
+    private void initUI() {
         fr.vegeto52.go4lunch.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -141,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Initialize ViewModel
-    private void initViewModel(){
+    private void initViewModel() {
         ViewModelFactory viewModelFactory = ViewModelFactory.getInstance();
         mMainActivityViewModel = new ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel.class);
         mMainActivityViewModel.getCurrentUserLiveData().observe(this, mainActivityViewState -> {
@@ -150,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Initialize Toolbar
-    private void initToolbar(){
+    // Initialize Toolbar - NavigationDrawer
+    private void initToolbar() {
         setSupportActionBar(mToolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.MA_navigation_drawer_open, R.string.MA_navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
@@ -159,21 +161,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Initialize Info user to NavigationView
-    private void initInfoUser(){
+    private void initInfoUser() {
         mMailUserNav.setText(mCurrentUser.getAdressMail());
         mUsernameNav.setText(mCurrentUser.getUserName());
         Glide.with(MainActivity.this).load(mCurrentUser.getUrlPhoto()).into(mPhotoUserNav);
     }
 
     // NavigationView Item Selected
-    private void itemNavSelected(){
+    private void itemNavSelected() {
         mNavigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.MA_item_nav_your_lunch){
+            if (id == R.id.MA_item_nav_your_lunch) {
                 itemNavYourLunchSelected();
-            } else if (id == R.id.MA_item_nav_settings){
+            } else if (id == R.id.MA_item_nav_settings) {
                 itemNavSettingsSelected();
-            } else if (id == R.id.MA_item_nav_logout){
+            } else if (id == R.id.MA_item_nav_logout) {
                 itemNavLogOutSelected();
             }
             mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -182,8 +184,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // NavigationView Item "Your Lunch" Selected
-    private void itemNavYourLunchSelected(){
-        if (mCurrentUser.getSelectedResto() != null){
+    private void itemNavYourLunchSelected() {
+        if (!Objects.equals(mCurrentUser.getSelectedResto(), "")) {
 
             Fragment fragment = new DetailsRestaurantFragment();
             Bundle args = new Bundle();
@@ -201,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // NavigationView Item "Settings" Selected
-    private void itemNavSettingsSelected(){
+    private void itemNavSettingsSelected() {
 
         Fragment fragment = new SettingsFragment();
         getSupportFragmentManager()
@@ -212,10 +214,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // NavigationView Item "LogOut" Selected
-    private void itemNavLogOutSelected(){
+    private void itemNavLogOutSelected() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
-        if(account != null){
+        if (account != null) {
             GoogleSignIn.getClient(MainActivity.this, gso).signOut();
         }
         Intent intent = new Intent(MainActivity.this, AuthenticationActivity.class);
@@ -225,11 +227,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     // BottomNavigationView Item Selected
-    private void badgeSelected(){
+    private void badgeSelected() {
         mBottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment fragment;
             int id = item.getItemId();
-            if (id == R.id.MA_action_map_view){
+            if (id == R.id.MA_action_map_view) {
                 fragment = mMapViewFragment;
                 getSupportFragmentManager()
                         .beginTransaction()

@@ -36,7 +36,8 @@ import fr.vegeto52.go4lunch.model.User;
 import fr.vegeto52.go4lunch.ui.mainActivity.MainActivity;
 
 
-public class ListViewFragment extends Fragment {
+public class
+ListViewFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private Location mLocation;
@@ -70,7 +71,7 @@ public class ListViewFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof MainActivity){
+        if (context instanceof MainActivity) {
             MainActivity activity = (MainActivity) context;
             mBottomNavigationView = activity.getBottomNavigationView();
         }
@@ -89,7 +90,7 @@ public class ListViewFragment extends Fragment {
 
 
     // Initialize ViewModel
-    private void initViewModel(){
+    private void initViewModel() {
         ViewModelFactory viewModelFactory = ViewModelFactory.getInstance();
         ListViewViewModel listViewViewModel = new ViewModelProvider(this, viewModelFactory).get(ListViewViewModel.class);
         listViewViewModel.getListViewLiveData().observe(getViewLifecycleOwner(), listViewViewState -> {
@@ -102,7 +103,7 @@ public class ListViewFragment extends Fragment {
     }
 
     // Initialize RecyclerView
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         ListViewAdapter listViewAdapter = new ListViewAdapter(mLocation, mListRestaurants, mListUsers);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireContext(), layoutManager.getOrientation());
@@ -135,9 +136,9 @@ public class ListViewFragment extends Fragment {
 
     // Perform Search
     @SuppressLint("NotifyDataSetChanged")
-    private void performSearch(String text){
+    private void performSearch(String text) {
         ListViewAdapter listViewAdapter;
-        if (text.length() >= 3){
+        if (text.length() >= 3) {
             mFilteredListRestaurants = filterRestaurants(text);
             listViewAdapter = new ListViewAdapter(mLocation, mFilteredListRestaurants, mListUsers);
             mRecyclerView.setAdapter(listViewAdapter);
@@ -149,10 +150,10 @@ public class ListViewFragment extends Fragment {
         listViewAdapter.notifyDataSetChanged();
     }
 
-    private List<Restaurant.Results> filterRestaurants(String text){
+    private List<Restaurant.Results> filterRestaurants(String text) {
         List<Restaurant.Results> filteredList = new ArrayList<>();
-        for (Restaurant.Results restaurant : mListRestaurants){
-            if (restaurant.getName().toLowerCase().contains(text.toLowerCase())){
+        for (Restaurant.Results restaurant : mListRestaurants) {
+            if (restaurant.getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(restaurant);
             }
         }
@@ -162,13 +163,13 @@ public class ListViewFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.MS_sort_name){
+        if (id == R.id.MS_sort_name) {
             sortByName();
             return true;
         } else if (id == R.id.MS_sort_distance) {
             sorByDistance();
             return true;
-        } else if (id == R.id.MS_sort_rating){
+        } else if (id == R.id.MS_sort_rating) {
             sortByRating();
             return true;
         } else if (id == R.id.MS_sort_workmates) {
@@ -179,8 +180,8 @@ public class ListViewFragment extends Fragment {
     }
 
     // Sort by Name
-    private void sortByName(){
-        if (mFilteredListRestaurants.isEmpty()){
+    private void sortByName() {
+        if (mFilteredListRestaurants.isEmpty()) {
             Collections.sort(mListRestaurants, (results, t1) -> results.getName().compareToIgnoreCase(t1.getName()));
             ListViewAdapter listViewAdapter = new ListViewAdapter(mLocation, mListRestaurants, mListUsers);
             mRecyclerView.setAdapter(listViewAdapter);
@@ -192,8 +193,8 @@ public class ListViewFragment extends Fragment {
     }
 
     // Sort by Distance
-    private void sorByDistance(){
-        if (mFilteredListRestaurants.isEmpty()){
+    private void sorByDistance() {
+        if (mFilteredListRestaurants.isEmpty()) {
             Collections.sort(mListRestaurants, (results, t1) -> {
                 float distance = results.getDistance();
                 float distance1 = t1.getDistance();
@@ -214,8 +215,8 @@ public class ListViewFragment extends Fragment {
     }
 
     // Sort by Rating
-    private void sortByRating(){
-        if (mFilteredListRestaurants.isEmpty()){
+    private void sortByRating() {
+        if (mFilteredListRestaurants.isEmpty()) {
             Collections.sort(mListRestaurants, (results, t1) -> {
                 double rating = results.getRating();
                 double rating1 = t1.getRating();
@@ -235,8 +236,8 @@ public class ListViewFragment extends Fragment {
     }
 
     // Sort by Workmates
-    private void sortByWorkmates(){
-        if (mFilteredListRestaurants.isEmpty()){
+    private void sortByWorkmates() {
+        if (mFilteredListRestaurants.isEmpty()) {
             Collections.sort(mListRestaurants, (results, t1) -> {
                 int workmatesSelected = results.getWorkmates_selected();
                 int workmatesSelected1 = t1.getWorkmates_selected();

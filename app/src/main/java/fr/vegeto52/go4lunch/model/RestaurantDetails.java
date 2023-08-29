@@ -1,6 +1,9 @@
 package fr.vegeto52.go4lunch.model;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Vegeto52-PC on 03/08/2023.
@@ -64,6 +67,20 @@ public class RestaurantDetails {
         private String business_status;
         private String adr_address;
         private List<Address_components> address_components;
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+            RestaurantDetails.Result that = (RestaurantDetails.Result) obj;
+            return Objects.equals(website, that.website) &&
+                    Objects.equals(formatted_phone_number, that.formatted_phone_number);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(website, formatted_phone_number);
+        }
 
         public String getWebsite() {
             return website;

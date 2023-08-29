@@ -31,28 +31,28 @@ public class FirestoreRepository {
     }
 
     // For get Current User UID
-    private String getUidCurrentUser(){
+    private String getUidCurrentUser() {
         return mUidCurrentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
     }
 
     // For get List Users in Firestore
-    private CollectionReference getUsersCollection(){
+    private CollectionReference getUsersCollection() {
         return FirebaseFirestore.getInstance().collection(COLLECTION_NAME);
     }
 
     // Get List Users and Current User
-    public void getListUsersAndCurrentUser(){
+    public void getListUsersAndCurrentUser() {
         getUsersCollection().get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
+            if (task.isSuccessful()) {
                 QuerySnapshot querySnapshot = task.getResult();
                 List<DocumentSnapshot> documentSnapshots = querySnapshot.getDocuments();
-                for (DocumentSnapshot documentSnapshot : documentSnapshots){
+                for (DocumentSnapshot documentSnapshot : documentSnapshots) {
                     User user = documentSnapshot.toObject(User.class);
                     String uid = documentSnapshot.getId();
                     assert user != null;
                     user.setUid(uid);
                     mUserList.add(user);
-                    if (getUidCurrentUser().equals(user.getUid())){
+                    if (getUidCurrentUser().equals(user.getUid())) {
                         mCurrentUserMutableLiveData.setValue(user);
                     }
                 }
@@ -62,30 +62,30 @@ public class FirestoreRepository {
     }
 
     // Update User Selected Restaurant
-    public void setSelectedRestaurant(String placeId){
+    public void setSelectedRestaurant(String placeId) {
         String currentUserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         getUsersCollection().document(currentUserId).update("selectedResto", placeId);
     }
 
     // Update User Favorites Restaurants
-    public void setFavoritesRestaurants(List<String> favoritesRestaurants){
+    public void setFavoritesRestaurants(List<String> favoritesRestaurants) {
         String currentUserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        getUsersCollection().document(currentUserId).update("FAVORITE_RESTO_LIST", favoritesRestaurants);
+        getUsersCollection().document(currentUserId).update("favoritesResto", favoritesRestaurants);
     }
 
     // Update Notification activation
-    public void setNotifications(boolean notifications){
+    public void setNotifications(boolean notifications) {
         String currentUserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         getUsersCollection().document(currentUserId).update("notifications", notifications);
     }
 
     // LiveData for List Users
-    public LiveData<List<User>> getListUsersMutableLiveData(){
+    public LiveData<List<User>> getListUsersMutableLiveData() {
         return mListUsersMutableLiveData;
     }
 
     //LiveData for CurrentUser
-    public LiveData<User> getCurrentUserMutableLiveData(){
+    public LiveData<User> getCurrentUserMutableLiveData() {
         return mCurrentUserMutableLiveData;
     }
 

@@ -25,7 +25,7 @@ public class SettingsFragment extends Fragment {
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch mNotificationSwitch;
-    private SettingsFragmentViewModel mSettingsFragmentViewModel;
+    private SettingsViewModel mSettingsViewModel;
     private User mCurrentUser;
 
     @Override
@@ -46,20 +46,22 @@ public class SettingsFragment extends Fragment {
         return view;
     }
 
-    private void initViewModel(){
+    // Initialize ViewModel
+    private void initViewModel() {
         ViewModelFactory viewModelFactory = ViewModelFactory.getInstance();
-        mSettingsFragmentViewModel = new ViewModelProvider(this, viewModelFactory).get(SettingsFragmentViewModel.class);
-        mSettingsFragmentViewModel.getCurrentUserLiveData().observe(getViewLifecycleOwner(), settingsFragmentViewState -> {
+        mSettingsViewModel = new ViewModelProvider(this, viewModelFactory).get(SettingsViewModel.class);
+        mSettingsViewModel.getCurrentUserLiveData().observe(getViewLifecycleOwner(), settingsFragmentViewState -> {
             mCurrentUser = settingsFragmentViewState.getCurrentUser();
             managementNotifications();
         });
     }
 
-    private void managementNotifications(){
+    // Initialize Switch Notifications
+    private void managementNotifications() {
         boolean notificationsActivation = mCurrentUser.isNotifications();
         mNotificationSwitch.setChecked(notificationsActivation);
         mNotificationSwitch.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (b){
+            if (b) {
                 enableNotifications();
             } else {
                 disableNotifications();
@@ -67,13 +69,15 @@ public class SettingsFragment extends Fragment {
         });
     }
 
-    private void enableNotifications(){
-        mSettingsFragmentViewModel.setNotifications(true);
+    // Enable Notifications
+    private void enableNotifications() {
+        mSettingsViewModel.setNotifications(true);
         mCurrentUser.setNotifications(true);
     }
 
-    private void disableNotifications(){
-        mSettingsFragmentViewModel.setNotifications(false);
+    // Disable Notifications
+    private void disableNotifications() {
+        mSettingsViewModel.setNotifications(false);
         mCurrentUser.setNotifications(false);
     }
 }

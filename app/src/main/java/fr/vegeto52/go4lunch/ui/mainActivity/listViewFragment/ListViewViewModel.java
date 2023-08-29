@@ -21,8 +21,8 @@ public class ListViewViewModel extends ViewModel {
 
     private final MediatorLiveData<ListViewViewState> mMediatorLiveData = new MediatorLiveData<>();
 
-    public ListViewViewModel(LocationRepository locationRepository, NearbySearchRepository nearbySearchRepository, FirestoreRepository firestoreRepository){
-        LiveData<Location> location =locationRepository.getLocationLiveData();
+    public ListViewViewModel(LocationRepository locationRepository, NearbySearchRepository nearbySearchRepository, FirestoreRepository firestoreRepository) {
+        LiveData<Location> location = locationRepository.getLocationLiveData();
         LiveData<List<Restaurant.Results>> restaurants = nearbySearchRepository.getListRestaurantLiveData();
         LiveData<List<User>> listUsers = firestoreRepository.getListUsersMutableLiveData();
 
@@ -31,13 +31,13 @@ public class ListViewViewModel extends ViewModel {
         mMediatorLiveData.addSource(listUsers, listUsers1 -> combine(location.getValue(), restaurants.getValue(), listUsers1));
     }
 
-    private void combine(Location location, List<Restaurant.Results> listRestaurants, List<User> listUsers){
-        if (location != null && listRestaurants != null && listUsers != null){
+    private void combine(Location location, List<Restaurant.Results> listRestaurants, List<User> listUsers) {
+        if (location != null && listRestaurants != null && listUsers != null) {
             mMediatorLiveData.setValue(new ListViewViewState(location, listRestaurants, listUsers));
         }
     }
 
-    public LiveData<ListViewViewState> getListViewLiveData(){
+    public LiveData<ListViewViewState> getListViewLiveData() {
         return mMediatorLiveData;
     }
 }

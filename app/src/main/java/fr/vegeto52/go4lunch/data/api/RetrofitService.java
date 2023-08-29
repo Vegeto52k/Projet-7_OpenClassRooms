@@ -15,7 +15,7 @@ public class RetrofitService {
 
     private static Retrofit sRetrofit;
 
-    public static Retrofit getRetrofitInstance(){
+    public static Retrofit getRetrofitInstance() {
 
         Gson gson = new GsonBuilder().serializeNulls().create();
 
@@ -26,7 +26,7 @@ public class RetrofitService {
                 .addInterceptor(loggingInterceptor)
                 .build();
 
-        if(sRetrofit == null) {
+        if (sRetrofit == null) {
             String BASE_URL = "https://maps.googleapis.com/maps/api/place/";
             sRetrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)

@@ -3,6 +3,7 @@ package fr.vegeto52.go4lunch.ui.mainActivity.detailsRestaurantFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,19 +89,20 @@ public class DetailsRestaurantFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.DRF_recyclerview_list_people_resto_details);
 
         Bundle args = getArguments();
-        if (args != null){
+        if (args != null) {
             mPlaceId = args.getString("placeId");
         }
+        initViewModel();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initViewModel();
     }
 
-    private void initViewModel(){
+    // Initialize ViewModel
+    private void initViewModel() {
         ViewModelFactory viewModelFactory = ViewModelFactory.getInstance();
         mDetailsRestaurantViewModel = new ViewModelProvider(this, viewModelFactory).get(DetailsRestaurantViewModel.class);
         mDetailsRestaurantViewModel.getViewModelDetailsRestaurantLiveData().observe(getViewLifecycleOwner(), detailsRestaurantViewState -> {
@@ -116,10 +118,11 @@ public class DetailsRestaurantFragment extends Fragment {
         });
     }
 
-    private void initUI(){
+    // Initialize UI
+    private void initUI() {
         mBottomNavigationView.setVisibility(View.GONE);
-        for (Restaurant.Results restaurant : mListRestaurant){
-            if (restaurant.getPlace_id().equals(mPlaceId)){
+        for (Restaurant.Results restaurant : mListRestaurant) {
+            if (restaurant.getPlace_id().equals(mPlaceId)) {
                 mNameResto.setText(restaurant.getName());
                 String urlPhoto = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=" + restaurant.getPhotos().get(0).getPhoto_reference() + "&key=AIzaSyCuiuuSU0l2xgi-bWz_gYHM1EkZJeuWmx4";
                 Glide.with(this)
@@ -137,25 +140,28 @@ public class DetailsRestaurantFragment extends Fragment {
         checkUserSelectedRestaurant();
     }
 
-    private void initRecyclerView(){
+    // Initialize RecyclerView
+    private void initRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         DetailsRestaurantAdapter detailsRestaurantAdapter = new DetailsRestaurantAdapter(mListUserSelectedRestaurant);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(detailsRestaurantAdapter);
     }
 
-    private void checkUserSelectedRestaurant(){
+    // Check if user selected restaurant
+    private void checkUserSelectedRestaurant() {
         mListUserSelectedRestaurant.clear();
-        for (User user : mListUsers){
-            if (user.getSelectedResto() != null && user.getSelectedResto().equals(mPlaceId)){
+        for (User user : mListUsers) {
+            if (user.getSelectedResto() != null && user.getSelectedResto().equals(mPlaceId)) {
                 mListUserSelectedRestaurant.add(user);
             }
         }
         initRecyclerView();
     }
 
-    private void starsRatingUI(double rating){
-        if (rating <= 1.25){
+    // Initialize stars rating
+    private void starsRatingUI(double rating) {
+        if (rating <= 1.25) {
             mStarRating1.setVisibility(View.GONE);
             mStarRating2.setVisibility(View.GONE);
             mStarRating3.setVisibility(View.GONE);
@@ -167,45 +173,47 @@ public class DetailsRestaurantFragment extends Fragment {
         }
     }
 
-    private void restoSelectedUI(){
-       if (mCurrentUser.getSelectedResto() != null && mCurrentUser.getSelectedResto().equals(mPlaceId)){
-           mRestoSelected.setImageResource(R.drawable.baseline_check_circle_24);
-           iconCheckedRestoSelected = true;
-       } else {
-           mRestoSelected.setImageResource(R.drawable.baseline_cancel_24);
-           iconCheckedRestoSelected = false;
-       }
-       mRestoSelected.setOnClickListener(view -> {
-           if (iconCheckedRestoSelected){
-               mDetailsRestaurantViewModel.setSelectedRestaurant("");
-               mListUsers.remove(mCurrentUser);
-               mCurrentUser.setSelectedResto("");
-               mRestoSelected.setImageResource(R.drawable.baseline_cancel_24);
-               iconCheckedRestoSelected = false;
-               checkUserSelectedRestaurant();
-           } else {
-               mDetailsRestaurantViewModel.setSelectedRestaurant(mPlaceId);
-               mCurrentUser.setSelectedResto(mPlaceId);
-               boolean isUserAlreadyInList = false;
-               for (User user : mListUsers){
-                   if (user.getUid().equals(mCurrentUser.getUid())){
-                       isUserAlreadyInList = true;
-                       break;
-                   }
-               }
-               if (!isUserAlreadyInList){
-                   mListUsers.add(mCurrentUser);
-               }
-               mRestoSelected.setImageResource(R.drawable.baseline_check_circle_24);
-               iconCheckedRestoSelected = true;
-               checkUserSelectedRestaurant();
-           }
-       });
+    // Button resto selected
+    private void restoSelectedUI() {
+        if (mCurrentUser.getSelectedResto() != null && mCurrentUser.getSelectedResto().equals(mPlaceId)) {
+            mRestoSelected.setImageResource(R.drawable.baseline_check_circle_24);
+            iconCheckedRestoSelected = true;
+        } else {
+            mRestoSelected.setImageResource(R.drawable.baseline_cancel_24);
+            iconCheckedRestoSelected = false;
+        }
+        mRestoSelected.setOnClickListener(view -> {
+            if (iconCheckedRestoSelected) {
+                mDetailsRestaurantViewModel.setSelectedRestaurant("");
+                mListUsers.remove(mCurrentUser);
+                mCurrentUser.setSelectedResto("");
+                mRestoSelected.setImageResource(R.drawable.baseline_cancel_24);
+                iconCheckedRestoSelected = false;
+                checkUserSelectedRestaurant();
+            } else {
+                mDetailsRestaurantViewModel.setSelectedRestaurant(mPlaceId);
+                mCurrentUser.setSelectedResto(mPlaceId);
+                boolean isUserAlreadyInList = false;
+                for (User user : mListUsers) {
+                    if (user.getUid().equals(mCurrentUser.getUid())) {
+                        isUserAlreadyInList = true;
+                        break;
+                    }
+                }
+                if (!isUserAlreadyInList) {
+                    mListUsers.add(mCurrentUser);
+                }
+                mRestoSelected.setImageResource(R.drawable.baseline_check_circle_24);
+                iconCheckedRestoSelected = true;
+                checkUserSelectedRestaurant();
+            }
+        });
     }
 
-    private void callButton(){
+    // Button call
+    private void callButton() {
         mCallResto.setOnClickListener(view -> {
-            if (mRestaurantDetails.getFormatted_phone_number() != null){
+            if (mRestaurantDetails.getFormatted_phone_number() != null) {
                 Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mRestaurantDetails.getFormatted_phone_number()));
                 startActivity(dialIntent);
             } else {
@@ -214,9 +222,10 @@ public class DetailsRestaurantFragment extends Fragment {
         });
     }
 
-    private void likeDislikeButton(){
+    // Button like-dislike
+    private void likeDislikeButton() {
         mUserFavoriteResto = mCurrentUser.getFavoritesResto();
-        if (mUserFavoriteResto.contains(mPlaceId)){
+        if (mUserFavoriteResto.contains(mPlaceId)) {
             mLikeResto.setText(getResources().getString(R.string.DRF_like));
             mLikeResto.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.baseline_star_like_24, 0, 0);
             iconLikeDislikeResto = false;
@@ -227,7 +236,7 @@ public class DetailsRestaurantFragment extends Fragment {
         }
 
         mLikeResto.setOnClickListener(view -> {
-            if (iconLikeDislikeResto){
+            if (iconLikeDislikeResto) {
                 mUserFavoriteResto.add(mPlaceId);
                 mDetailsRestaurantViewModel.setFavoritesRestaurant(mUserFavoriteResto);
                 mLikeResto.setText(getResources().getString(R.string.DRF_like));
@@ -245,9 +254,10 @@ public class DetailsRestaurantFragment extends Fragment {
         });
     }
 
-    private void websiteButton(){
+    // Button website
+    private void websiteButton() {
         mWebsiteResto.setOnClickListener(view -> {
-            if (mRestaurantDetails.getWebsite() != null){
+            if (mRestaurantDetails.getWebsite() != null) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(mRestaurantDetails.getWebsite()));
                 startActivity(intent);

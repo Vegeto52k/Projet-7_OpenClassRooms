@@ -86,9 +86,9 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         // Initialize ActivityResultLauncher
         mGoogleSignInLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == Activity.RESULT_OK){
+            if (result.getResultCode() == Activity.RESULT_OK) {
                 Intent data = result.getData();
-                if (data != null){
+                if (data != null) {
                     Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                     handleGoogleSignInResult(task);
                 }
@@ -100,7 +100,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         // Click on Facebook Button
         mButtonFacebook.setOnClickListener(view1 -> {
-        //    signInWithFacebook();
+            //    signInWithFacebook();
             Toast.makeText(AuthenticationActivity.this, getResources().getString(R.string.AA_facebook_login_disabled), Toast.LENGTH_SHORT).show();
         });
     }
@@ -111,19 +111,19 @@ public class AuthenticationActivity extends AppCompatActivity {
         mGoogleSignInLauncher.launch(signInIntent);
     }
 
-    private void handleGoogleSignInResult(Task<GoogleSignInAccount> completedTask){
+    private void handleGoogleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             // Google Sign In was successful, authenticate with Firebase
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             String idToken = account.getIdToken();
             firebaseAuthWithGoogle(idToken);
-        } catch (ApiException e){
+        } catch (ApiException e) {
             // Google Sign In failed, update UI appropriately
         }
     }
 
     // Firebase Authentication with Google
-    private void firebaseAuthWithGoogle(String idToken){
+    private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
@@ -139,19 +139,19 @@ public class AuthenticationActivity extends AppCompatActivity {
                         String adressMail = user.getEmail();
 
                         usersRef.document(uid).get().addOnSuccessListener(documentSnapshot -> {
-                            if (documentSnapshot.exists()){
+                            if (documentSnapshot.exists()) {
                                 Map<String, Object> userDoc = new HashMap<>();
-                                if (documentSnapshot.contains("selectedResto")){
+                                if (documentSnapshot.contains("selectedResto")) {
                                     userDoc.put("selectedResto", documentSnapshot.get("selectedResto"));
                                 } else {
                                     userDoc.put("selectedResto", "");
                                 }
-                                if (documentSnapshot.contains("FAVORITE_RESTO_LIST")) {
-                                    userDoc.put("FAVORITE_RESTO_LIST", documentSnapshot.get("FAVORITE_RESTO_LIST"));
+                                if (documentSnapshot.contains("favoritesResto")) {
+                                    userDoc.put("favoritesResto", documentSnapshot.get("favoritesResto"));
                                 } else {
-                                    userDoc.put("FAVORITE_RESTO_LIST", new ArrayList<String>());
+                                    userDoc.put("favoritesResto", new ArrayList<String>());
                                 }
-                                if (documentSnapshot.contains("notifications")){
+                                if (documentSnapshot.contains("notifications")) {
                                     userDoc.put("notifications", documentSnapshot.get("notifications"));
                                 } else {
                                     userDoc.put("notifications", true);
@@ -163,7 +163,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                                 userDoc.put("urlPhoto", photoUri);
                                 userDoc.put("adressMail", adressMail);
                                 userDoc.put("selectedResto", "");
-                                userDoc.put("FAVORITE_RESTO_LIST", new ArrayList<String>());
+                                userDoc.put("favoritesResto", new ArrayList<String>());
                                 userDoc.put("notifications", true);
                                 usersRef.document(uid).set(userDoc).addOnSuccessListener(unused -> signInSuccesNewActivity());
                             }
@@ -176,7 +176,8 @@ public class AuthenticationActivity extends AppCompatActivity {
                 });
     }
 
-    private void signInSuccesNewActivity(){
+    // Sign In Success, Go to MainActivity
+    private void signInSuccesNewActivity() {
         Intent intent = new Intent(AuthenticationActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

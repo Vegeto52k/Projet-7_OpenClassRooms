@@ -22,7 +22,7 @@ public class MapViewViewModel extends ViewModel {
     private final MediatorLiveData<MapViewViewState> mMediatorLiveData = new MediatorLiveData<>();
 
 
-    public MapViewViewModel(LocationRepository locationRepository, NearbySearchRepository nearbySearchRepository, FirestoreRepository firestoreRepository){
+    public MapViewViewModel(LocationRepository locationRepository, NearbySearchRepository nearbySearchRepository, FirestoreRepository firestoreRepository) {
 
         LiveData<Location> location = locationRepository.getLocationLiveData();
         LiveData<List<Restaurant.Results>> listRestaurants = nearbySearchRepository.getListRestaurantLiveData();
@@ -35,13 +35,13 @@ public class MapViewViewModel extends ViewModel {
 
     }
 
-    private void combine(Location location, List<Restaurant.Results> listRestaurants, List<User> listUsers){
-        if (location != null && listRestaurants != null && listUsers != null){
+    private void combine(Location location, List<Restaurant.Results> listRestaurants, List<User> listUsers) {
+        if (location != null && listRestaurants != null && listUsers != null) {
             mMediatorLiveData.setValue(new MapViewViewState(location, listRestaurants, listUsers));
         }
     }
 
-    public LiveData<MapViewViewState> getMapViewLiveData(){
+    public LiveData<MapViewViewState> getMapViewLiveData() {
         return mMediatorLiveData;
     }
 }

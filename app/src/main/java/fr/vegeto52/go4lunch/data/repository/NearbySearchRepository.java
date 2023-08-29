@@ -29,12 +29,12 @@ public class NearbySearchRepository {
     private final MutableLiveData<List<Restaurant.Results>> mListRestaurantMutableLiveData = new MutableLiveData<>();
 
 
-    public NearbySearchRepository(){
+    public NearbySearchRepository() {
 
     }
 
     // Get List Restaurants
-    public void getNearbySearch(Location location){
+    public void getNearbySearch(Location location) {
         NearbySearchApi nearbySearchApi = RetrofitService.getRetrofitInstance().create(NearbySearchApi.class);
         mCurrentLatitude = location.getLatitude();
         mCurrentLongitude = location.getLongitude();
@@ -55,7 +55,7 @@ public class NearbySearchRepository {
     }
 
     // LiveData for List Restaurants
-    public LiveData<List<Restaurant.Results>> getListRestaurantLiveData(){
+    public LiveData<List<Restaurant.Results>> getListRestaurantLiveData() {
         return mListRestaurantMutableLiveData;
     }
 }

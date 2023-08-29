@@ -12,8 +12,7 @@ import fr.vegeto52.go4lunch.ui.mainActivity.MainActivityViewModel;
 import fr.vegeto52.go4lunch.ui.mainActivity.detailsRestaurantFragment.DetailsRestaurantViewModel;
 import fr.vegeto52.go4lunch.ui.mainActivity.listViewFragment.ListViewViewModel;
 import fr.vegeto52.go4lunch.ui.mainActivity.mapViewFragment.MapViewViewModel;
-import fr.vegeto52.go4lunch.ui.mainActivity.settingsFragment.SettingsFragment;
-import fr.vegeto52.go4lunch.ui.mainActivity.settingsFragment.SettingsFragmentViewModel;
+import fr.vegeto52.go4lunch.ui.mainActivity.settingsFragment.SettingsViewModel;
 import fr.vegeto52.go4lunch.ui.mainActivity.workmatesViewFragment.WorkmatesViewViewModel;
 
 /**
@@ -29,10 +28,10 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     private static volatile ViewModelFactory sFactory;
 
 
-    public static ViewModelFactory getInstance(){
-        if (sFactory == null){
-            synchronized (ViewModelFactory.class){
-                if (sFactory == null){
+    public static ViewModelFactory getInstance() {
+        if (sFactory == null) {
+            synchronized (ViewModelFactory.class) {
+                if (sFactory == null) {
                     sFactory = new ViewModelFactory();
                 }
             }
@@ -40,7 +39,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         return sFactory;
     }
 
-    private ViewModelFactory(){
+    private ViewModelFactory() {
         this.mFirestoreRepository = new FirestoreRepository();
         this.mLocationRepository = new LocationRepository();
         this.mNearbySearchRepository = new NearbySearchRepository();
@@ -52,23 +51,23 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     @SuppressWarnings("unchecked")
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(MainActivityViewModel.class)){
+        if (modelClass.isAssignableFrom(MainActivityViewModel.class)) {
             return (T) new MainActivityViewModel(mFirestoreRepository);
         }
-        if (modelClass.isAssignableFrom(MapViewViewModel.class)){
+        if (modelClass.isAssignableFrom(MapViewViewModel.class)) {
             return (T) new MapViewViewModel(mLocationRepository, mNearbySearchRepository, mFirestoreRepository);
         }
-        if (modelClass.isAssignableFrom(ListViewViewModel.class)){
+        if (modelClass.isAssignableFrom(ListViewViewModel.class)) {
             return (T) new ListViewViewModel(mLocationRepository, mNearbySearchRepository, mFirestoreRepository);
         }
-        if (modelClass.isAssignableFrom(WorkmatesViewViewModel.class)){
+        if (modelClass.isAssignableFrom(WorkmatesViewViewModel.class)) {
             return (T) new WorkmatesViewViewModel(mFirestoreRepository, mNearbySearchRepository);
         }
-        if (modelClass.isAssignableFrom(DetailsRestaurantViewModel.class)){
+        if (modelClass.isAssignableFrom(DetailsRestaurantViewModel.class)) {
             return (T) new DetailsRestaurantViewModel(mFirestoreRepository, mNearbySearchRepository, mPlaceDetailsRepository);
         }
-        if (modelClass.isAssignableFrom(SettingsFragmentViewModel.class)){
-            return (T) new SettingsFragmentViewModel(mFirestoreRepository);
+        if (modelClass.isAssignableFrom(SettingsViewModel.class)) {
+            return (T) new SettingsViewModel(mFirestoreRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

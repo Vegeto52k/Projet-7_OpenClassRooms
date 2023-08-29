@@ -2,6 +2,7 @@ package fr.vegeto52.go4lunch.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Nullable;
 
@@ -17,7 +18,7 @@ public class User {
     @Nullable
     private String mSelectedResto;
     private String mAdressMail;
-    private List<String> mFAVORITE_RESTO_LIST = new ArrayList<>();
+    private List<String> mfavoritesResto = new ArrayList<>();
     private boolean mNotifications;
 
 
@@ -25,14 +26,33 @@ public class User {
     }
 
     //Constructor
-    public User(String uid, String userName, @Nullable String urlPhoto, @Nullable String selectedResto, String adressMail, List<String> FAVORITE_RESTO_LIST, boolean notifications) {
+    public User(String uid, String userName, @Nullable String urlPhoto, @Nullable String selectedResto, String adressMail, List<String> favoritesResto, boolean notifications) {
         mUid = uid;
         mUserName = userName;
         mUrlPhoto = urlPhoto;
         mSelectedResto = selectedResto;
         mAdressMail = adressMail;
-        mFAVORITE_RESTO_LIST = FAVORITE_RESTO_LIST;
+        mfavoritesResto = favoritesResto;
         mNotifications = notifications;
+    }
+
+    @Override
+    public boolean equals(@androidx.annotation.Nullable Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        User that = (User) obj;
+        return Objects.equals(mUid, that.mUid) &&
+                Objects.equals(mUserName, that.mUserName) &&
+                Objects.equals(mUrlPhoto, that.mUrlPhoto) &&
+                Objects.equals(mSelectedResto, that.mSelectedResto) &&
+                Objects.equals(mAdressMail, that.mAdressMail) &&
+                Objects.equals(mfavoritesResto, that.mfavoritesResto) &&
+                Objects.equals(mNotifications, that.mNotifications);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mUid, mUserName, mUrlPhoto, mSelectedResto, mAdressMail, mfavoritesResto, mNotifications);
     }
 
     //Getters
@@ -59,7 +79,11 @@ public class User {
     }
 
     public List<String> getFavoritesResto() {
-        return mFAVORITE_RESTO_LIST;
+        return mfavoritesResto;
+    }
+
+    public boolean isNotifications() {
+        return mNotifications;
     }
 
     //Setters
@@ -84,11 +108,7 @@ public class User {
     }
 
     public void setFavoritesResto(List<String> favoritesResto) {
-        mFAVORITE_RESTO_LIST = favoritesResto;
-    }
-
-    public boolean isNotifications() {
-        return mNotifications;
+        mfavoritesResto = favoritesResto;
     }
 
     public void setNotifications(boolean notifications) {

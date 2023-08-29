@@ -11,11 +11,11 @@ public class Restaurant {
     private List<Results> results;
     private List<String> html_attributions;
 
-    public String getStatus() {
-        return status;
-    }
+   public String getStatus() {
+       return status;
+   }
 
-    public void setStatus(String status) {
+   public void setStatus(String status) {
         this.status = status;
     }
 
@@ -66,7 +66,7 @@ public class Restaurant {
             this.distance = distance;
         }
 
-        public int getWorkmates_selected(){
+        public int getWorkmates_selected() {
             return workmates_selected;
         }
 
