@@ -50,7 +50,7 @@ public class WorkmatesViewViewModelTest {
     WorkmatesViewViewModel SUT;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         doReturn(listRestaurantsMutableLiveData)
                 .when(mockNearbySearchRepository)
                 .getListRestaurantLiveData();
@@ -65,7 +65,7 @@ public class WorkmatesViewViewModelTest {
     }
 
     @Test
-    public void nominalCase() throws Exception {
+    public void nominalCase() {
         assertEquals(getDefaultWorkmatesViewViewState().getRestaurantsList().size(), LiveDataTestUtils.getValueForTesting(SUT.getWorkmatesViewLiveData()).getRestaurantsList().size());
         assertEquals(getDefaultWorkmatesViewViewState().getUserList().size(), LiveDataTestUtils.getValueForTesting(SUT.getWorkmatesViewLiveData()).getUserList().size());
     }

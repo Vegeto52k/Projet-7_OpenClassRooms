@@ -1,20 +1,19 @@
 package fr.vegeto52.go4lunch.ui.authenticationActivity;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -24,15 +23,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 import fr.vegeto52.go4lunch.R;
 import fr.vegeto52.go4lunch.databinding.ActivityAuthenticationBinding;
@@ -42,12 +35,12 @@ import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 
 public class AuthenticationActivity extends AppCompatActivity {
 
+    AuthenticationViewModel mAuthenticationActivityViewModel;
     ActivityAuthenticationBinding mBinding;
     Button mButtonFacebook;
     Button mButtonGoogle;
     ImageView mBackgroundAuthView;
     private GoogleSignInClient mGoogleSignInClient;
-    private FirebaseAuth mAuth;
     private ActivityResultLauncher<Intent> mGoogleSignInLauncher;
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -56,6 +49,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         initUi();
     }
@@ -69,6 +63,8 @@ public class AuthenticationActivity extends AppCompatActivity {
         mButtonGoogle = findViewById(R.id.AA_sign_in_button_google);
         mBackgroundAuthView = findViewById(R.id.AA_background_auth_view);
 
+        initViewModel();
+
         // Configure background
         Glide.with(this)
                 .load("https://restaurant-lasiesta.fr/wp-content/uploads/2022/12/la-siesta-restaurant-canet-en-roussillon-2-570x855.jpeg")
@@ -81,8 +77,6 @@ public class AuthenticationActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        mAuth = FirebaseAuth.getInstance();
 
         // Initialize ActivityResultLauncher
         mGoogleSignInLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -105,6 +99,10 @@ public class AuthenticationActivity extends AppCompatActivity {
         });
     }
 
+    private void initViewModel(){
+        mAuthenticationActivityViewModel = new AuthenticationViewModel();
+    }
+
 
     private void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -125,55 +123,15 @@ public class AuthenticationActivity extends AppCompatActivity {
     // Firebase Authentication with Google
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-                        CollectionReference usersRef = db.collection("users");
-                        // Sign in success, update UI with the signed-in user's information
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        assert user != null;
-                        String uid = user.getUid();
-                        String name = user.getDisplayName();
-                        Uri photoUri = user.getPhotoUrl();
-                        String adressMail = user.getEmail();
-
-                        usersRef.document(uid).get().addOnSuccessListener(documentSnapshot -> {
-                            if (documentSnapshot.exists()) {
-                                Map<String, Object> userDoc = new HashMap<>();
-                                if (documentSnapshot.contains("selectedResto")) {
-                                    userDoc.put("selectedResto", documentSnapshot.get("selectedResto"));
-                                } else {
-                                    userDoc.put("selectedResto", "");
-                                }
-                                if (documentSnapshot.contains("favoritesResto")) {
-                                    userDoc.put("favoritesResto", documentSnapshot.get("favoritesResto"));
-                                } else {
-                                    userDoc.put("favoritesResto", new ArrayList<String>());
-                                }
-                                if (documentSnapshot.contains("notifications")) {
-                                    userDoc.put("notifications", documentSnapshot.get("notifications"));
-                                } else {
-                                    userDoc.put("notifications", true);
-                                }
-                                usersRef.document(uid).update(userDoc).addOnSuccessListener(unused -> signInSuccesNewActivity());
-                            } else {
-                                Map<String, Object> userDoc = new HashMap<>();
-                                userDoc.put("userName", name);
-                                userDoc.put("urlPhoto", photoUri);
-                                userDoc.put("adressMail", adressMail);
-                                userDoc.put("selectedResto", "");
-                                userDoc.put("favoritesResto", new ArrayList<String>());
-                                userDoc.put("notifications", true);
-                                usersRef.document(uid).set(userDoc).addOnSuccessListener(unused -> signInSuccesNewActivity());
-                            }
-                        });
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(AuthenticationActivity.this, getResources().getString(R.string.AA_authentication_failed),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
+        mAuthenticationActivityViewModel.createOrUpdateUser(credential);
+        mAuthenticationActivityViewModel.getCheckUserAuthenticateLiveData().observe(this, s -> {
+            if (Objects.equals(s, "Success")) {
+                signInSuccesNewActivity();
+            } else {
+                Toast.makeText(AuthenticationActivity.this, getResources().getString(R.string.AA_authentication_failed),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Sign In Success, Go to MainActivity

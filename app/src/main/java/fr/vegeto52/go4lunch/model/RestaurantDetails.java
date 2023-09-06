@@ -8,6 +8,7 @@ import java.util.Objects;
 /**
  * Created by Vegeto52-PC on 03/08/2023.
  */
+@SuppressWarnings("unused")
 public class RestaurantDetails {
 
     public RestaurantDetails() {

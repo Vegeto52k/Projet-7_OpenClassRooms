@@ -1,6 +1,5 @@
 package fr.vegeto52.go4lunch.viewModelTest;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
@@ -43,7 +42,7 @@ public class SettingsViewModelTest {
     SettingsViewModel SUT;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         doReturn(mCurrentUserMutableLiveData)
                 .when(mockFirestoreRepository)
                 .getCurrentUserMutableLiveData();
@@ -54,7 +53,7 @@ public class SettingsViewModelTest {
     }
 
     @Test
-    public void nominalCase() throws Exception {
+    public void nominalCase() {
         boolean areEqua1 = getDefaultSettingsViewState().getCurrentUser().equals(LiveDataTestUtils.getValueForTesting(SUT.getCurrentUserLiveData()).getCurrentUser());
         assertTrue(areEqua1);
 

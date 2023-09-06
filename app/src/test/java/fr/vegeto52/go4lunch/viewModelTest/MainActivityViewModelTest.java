@@ -1,10 +1,7 @@
 package fr.vegeto52.go4lunch.viewModelTest;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.verify;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.MutableLiveData;
@@ -45,7 +42,7 @@ public class MainActivityViewModelTest {
 
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         doReturn(mCurrentUserMutableLiveData)
                 .when(mMockFirestoreRepository)
                 .getCurrentUserMutableLiveData();

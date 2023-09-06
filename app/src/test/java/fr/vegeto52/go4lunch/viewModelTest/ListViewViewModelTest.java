@@ -37,15 +37,11 @@ public class ListViewViewModelTest {
     @Rule
     public final InstantTaskExecutorRule mInstantTaskExecutorRule = new InstantTaskExecutorRule();
 
-    // region constants
     public static final String USER_USER_NAME = "userUserName";
     public static final String USER_PHOTO_URL = "UserPhotoUrl";
     public static final String USER_SELECTED_RESTO = "UserSelectedResto";
     public static final String USER_EMAIL = "UserEmail";
 
-    // endregion constants
-
-    // region helper fields
     @Mock
     LocationRepository mockLocationRepository;
     @Mock
@@ -54,19 +50,14 @@ public class ListViewViewModelTest {
     FirestoreRepository mockFirestoreRepository;
     @Mock
     Location mockLocation;
-    // Les MutableLiveData, renvoyées par les Repository
-    private final MutableLiveData<Location> locationMutableLiveData=new MutableLiveData<>(); //LiveData<Location> getLocationLiveData(LocationRepository)
-    private final MutableLiveData<List<Restaurant.Results>> listRestaurantsMutableLiveData =new MutableLiveData<>(); //LiveData<List<Restaurant.Results>> getListRestaurantLiveData(NearbySearchRepository)
-    private final MutableLiveData<List<User>> usersMutableLiveData=new MutableLiveData<>(); // LiveData<List<User>> getListUsersMutableLiveData()(FirestoreRepository)
-    // endregion helper fields
-    ListViewViewModel SUT; // SUT: System Under Test
+
+    private final MutableLiveData<Location> locationMutableLiveData=new MutableLiveData<>();
+    private final MutableLiveData<List<Restaurant.Results>> listRestaurantsMutableLiveData =new MutableLiveData<>();
+    private final MutableLiveData<List<User>> usersMutableLiveData=new MutableLiveData<>();
+    ListViewViewModel SUT;
 
     @Before
-    public void setup() throws Exception {
-    //    doReturn(-21.2903707).when(mockLocation).getLatitude();
-    //    doReturn(55.5057001).when(mockLocation).getLongitude();
-
-        // Spécifier le comportement des méthodes des Repository
+    public void setup() {
         doReturn(locationMutableLiveData)
                 .when(mockLocationRepository)
                 .getLocationLiveData();
@@ -76,25 +67,22 @@ public class ListViewViewModelTest {
         doReturn(usersMutableLiveData)
                 .when(mockFirestoreRepository)
                 .getListUsersMutableLiveData();
-        // Fixer le contenu des LiveData, renvoyées par les méthodes des Repository
+
         locationMutableLiveData.setValue(mockLocation);
-        listRestaurantsMutableLiveData.setValue(getDefaultRestaurantListIn()); // Méthode définie plus bas
-        usersMutableLiveData.setValue(getDefaultUsersIn()); // Méthode définie plus bas
-        // Instanciation du SUT
+        listRestaurantsMutableLiveData.setValue(getDefaultRestaurantListIn());
+        usersMutableLiveData.setValue(getDefaultUsersIn());
+
         SUT = new ListViewViewModel(mockLocationRepository, mockNearbySearchRepository, mockFirestoreRepository);
 
     }
 
     @Test
-    public void nominalCase() throws Exception {
-        // Arrange
-        // Act
+    public void nominalCase() {
         assertEquals(getDefaultListViewViewState().getLocation(), LiveDataTestUtils.getValueForTesting(SUT.getListViewLiveData()).getLocation());
         assertEquals(getDefaultListViewViewState().getRestaurantList().size(), LiveDataTestUtils.getValueForTesting(SUT.getListViewLiveData()).getRestaurantList().size());
         assertEquals(getDefaultListViewViewState().getUserList().size(), LiveDataTestUtils.getValueForTesting(SUT.getListViewLiveData()).getUserList().size());
     }
 
-    // region helper methods
     private List<Restaurant.Results> getDefaultRestaurantListIn() {
         ArrayList<Restaurant.Results> resultsArrayList = new ArrayList<>();
         Restaurant.Results r1 = new Restaurant.Results();
@@ -153,6 +141,4 @@ public class ListViewViewModelTest {
     public ListViewViewState getDefaultListViewViewState() {
         return new ListViewViewState(mockLocation,getDefaultRestaurantListOut(),getDefaultUsersOut());
     }
-    // endregion helper classes
-
 }

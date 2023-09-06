@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import fr.vegeto52.go4lunch.BuildConfig;
 import fr.vegeto52.go4lunch.data.api.PlaceDetailsApi;
 import fr.vegeto52.go4lunch.data.api.RetrofitService;
 import fr.vegeto52.go4lunch.model.RestaurantDetails;
@@ -16,7 +17,7 @@ import retrofit2.Response;
  */
 public class PlaceDetailsRepository {
 
-    String mKey = "AIzaSyCuiuuSU0l2xgi-bWz_gYHM1EkZJeuWmx4";
+    String mKey = BuildConfig.MAPS_API_KEY;
     String mFields = "website,formatted_phone_number";
 
     private final MutableLiveData<RestaurantDetails.Result> mRestaurantDetailsMutableLiveData = new MutableLiveData<>();

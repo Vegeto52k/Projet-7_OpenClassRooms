@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 /**
  * Created by Vegeto52-PC on 21/07/2023.
  */
+@SuppressWarnings("unused")
 public class User {
 
     private String mUid;

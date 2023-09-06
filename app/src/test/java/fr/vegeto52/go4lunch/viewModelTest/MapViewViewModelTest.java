@@ -58,7 +58,7 @@ public class MapViewViewModelTest {
     MapViewViewModel SUT;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         doReturn(locationMutableLiveData)
                 .when(mockLocationRepository)
                 .getLocationLiveData();
@@ -77,7 +77,7 @@ public class MapViewViewModelTest {
     }
 
     @Test
-    public void nominalCase() throws Exception {
+    public void nominalCase() {
         assertEquals(getDefaultListViewViewState().getLocation(), LiveDataTestUtils.getValueForTesting(SUT.getMapViewLiveData()).getLocation());
         assertEquals(getDefaultListViewViewState().getListRestaurants().size(), LiveDataTestUtils.getValueForTesting(SUT.getMapViewLiveData()).getListRestaurants().size());
         assertEquals(getDefaultListViewViewState().getListUsers().size(), LiveDataTestUtils.getValueForTesting(SUT.getMapViewLiveData()).getListUsers().size());

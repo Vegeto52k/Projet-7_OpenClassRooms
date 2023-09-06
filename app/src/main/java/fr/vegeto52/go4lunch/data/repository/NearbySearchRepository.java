@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
+import fr.vegeto52.go4lunch.BuildConfig;
 import fr.vegeto52.go4lunch.data.api.NearbySearchApi;
 import fr.vegeto52.go4lunch.data.api.RetrofitService;
 import fr.vegeto52.go4lunch.model.Restaurant;
@@ -25,7 +26,7 @@ public class NearbySearchRepository {
     String mLatLng;
     int radius = 1500;
     String type = "restaurant";
-    String map_key = "AIzaSyCuiuuSU0l2xgi-bWz_gYHM1EkZJeuWmx4";
+    String map_key = BuildConfig.MAPS_API_KEY;
     private final MutableLiveData<List<Restaurant.Results>> mListRestaurantMutableLiveData = new MutableLiveData<>();
 
 

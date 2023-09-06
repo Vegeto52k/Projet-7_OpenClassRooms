@@ -62,7 +62,6 @@ public class NotificationService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
         if (message.getNotification() != null) {
-            Log.d("Notification Reçu", "J'ai bien reçu " + message.getNotification().getBody());
             getListUserAndCurrentUser();
         }
     }

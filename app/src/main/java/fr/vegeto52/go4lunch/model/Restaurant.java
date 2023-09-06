@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * Created by Vegeto52-PC on 25/07/2023.
  */
+@SuppressWarnings("unused")
 public class Restaurant {
 
     private String status;

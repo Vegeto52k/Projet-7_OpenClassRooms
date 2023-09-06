@@ -16,10 +16,24 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        buildConfigField "String", "MAPS_API_KEY", "\"${properties.getProperty("MAPS_API_KEY")}\""
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('../debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
     }
 
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 
     buildTypes {
@@ -80,5 +94,5 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
 
     //Firestore
-    implementation 'com.google.firebase:firebase-firestore:24.7.0'
+    implementation 'com.google.firebase:firebase-firestore:24.7.1'
 }
